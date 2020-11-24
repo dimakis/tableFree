@@ -1,3 +1,11 @@
+# command for staring json auth server
+json-server db.json --port 3030 -m ./node_modules/json-server-auth
+ref:
+https://www.npmjs.com/package/json-server-auth
+
+# inspiration and starting point
+https://www.freecodecamp.org/news/build-a-react-hooks-front-end-app-with-routing-and-authentication/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

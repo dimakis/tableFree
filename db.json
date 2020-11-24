@@ -1,0 +1,78 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "blah": {
+    "username": "johndoe@abc.com",
+    "password": "123"
+  },
+  "tables": [
+    {
+      "id": 1,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "johndoe@abc.com",
+      "username": "john_doe@gmail.com",
+      "status": "Terminated",
+      "password": "123456789"
+    },
+    {
+      "id": 2,
+      "first_name": "Jane",
+      "last_name": "Doe",
+      "email": "janedoe@abc.com",
+      "gender": "Female",
+      "status": "New"
+    },
+    {
+      "username": "johndoe@abc.com",
+      "password": "123",
+      "id": 3
+    }
+  ],
+  "customers": [
+    {
+      "id": 3,
+      "first_name": "Alice",
+      "last_name": "Doe",
+      "email": "alicedoe@abc.com",
+      "gender": "Female",
+      "status": "Leaving"
+    },
+    {
+      "id": 4,
+      "first_name": "Bob",
+      "last_name": "Doe",
+      "email": "bobdoe@abc.com",
+      "gender": "Male",
+      "status": "Active"
+    }
+  ]
+}
