@@ -1,11 +1,13 @@
 import React from "react";
 import { AuthContext } from "../App";
-import Card from "./Card";
+import Card from "../components/Card";
+
 const initialState = {
-  songs: [],
+  tables: [],
   isFetching: false,
   hasError: false,
 };
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_SONGS_REQUEST":
@@ -37,7 +39,7 @@ React.useEffect(() => {
     dispatch({
       type: "FETCH_SONGS_REQUEST"
     });
-    fetch("https://hookedbe.herokuapp.com/api/songs", {
+    fetch("http://localhost:3030/tables/", {
       headers: {
         Authorization: `Bearer ${authState.token}`
       }
@@ -73,9 +75,9 @@ React.useEffect(() => {
         <span className="error">AN ERROR HAS OCCURED</span>
       ) : (
         <>
-          {state.songs.length > 0 &&
-            state.songs.map(song => (
-              <Card key={song.id.toString()} song={song} />
+          {state.tables.length > 0 &&
+            state.tables.map(table => (
+              <Card key={table.id.toString()} table={table} />
             ))}
         </>
       )}

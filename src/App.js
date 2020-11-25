@@ -3,12 +3,15 @@ import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Header from "./components/Header";
+
 export const AuthContext = React.createContext();
+
 const initialState = {
   isAuthenticated: false,
   user: null,
   token: null,
 };
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
@@ -31,6 +34,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 return (

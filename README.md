@@ -3,6 +3,18 @@ json-server db.json --port 3030 -m ./node_modules/json-server-auth
 ref:
 https://www.npmjs.com/package/json-server-auth
 
+# for some nice housekeeping involving the servers
+https://medium.com/@joelazarz/using-concurrently-with-json-server-and-your-react-app-3d07487acc50
+
+# websites for autherisation header and token code
+https://www.loginradius.com/engineering/blog/everything-you-want-to-know-about-authorization-headers/
+
+https://flaviocopes.com/axios-send-authorization-header/
+
+https://jwt.io/introduction/
+# code for the authentication
+https://www.techiediaries.com/fake-api-jwt-json-server/
+
 # inspiration and starting point
 https://www.freecodecamp.org/news/build-a-react-hooks-front-end-app-with-routing-and-authentication/
 

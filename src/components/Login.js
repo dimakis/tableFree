@@ -1,5 +1,6 @@
 import React from "react";
 import { AuthContext } from "../App";
+import getUserDeets, { getUser } from "../api/local-api"
 
 export const Login = () => {
   const { dispatch } = React.useContext(AuthContext);
@@ -23,11 +24,12 @@ const handleFormSubmit = event => {
       isSubmitting: true,
       errorMessage: null
     });
-    fetch("http://localhost:3030/users", {
+    let id = data.email
+    const token = Buffer.from(`${data.email}:${data.password}`, 'utf8').toString('base64')
+    fetch("http://localhost:3031/users/", {
       method: "POST",
-      route: "/login",
       headers: {
-        "Content-Type": "application/json"
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         username: data.email,
@@ -35,7 +37,7 @@ const handleFormSubmit = event => {
       })
     })
       .then(res => {
-        if (res.ok) {
+         if (res.ok) {
           return res.json();
         }
         throw res;

@@ -1,0 +1,39 @@
+  {
+    "tables": [
+    {
+      "id": 1,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    }
+  ],
+
+
+
