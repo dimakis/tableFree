@@ -8,21 +8,33 @@ const initialState = {
   hasError: false,
 };
 
+let finalArr = [];
+const tableArrayCons = (obj) => {
+    let finalArr = finalArr.map(function(obj) {
+                  let id =  obj.id;
+                   let timeSlots = obj.timeSlots
+              return {
+                  finalArr
+              }
+          }
+        )
+    };
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_SONGS_REQUEST":
+    case "FETCH_TABLES_REQUEST":
       return {
         ...state,
         isFetching: true,
         hasError: false
       };
-    case "FETCH_SONGS_SUCCESS":
+    case "FETCH_TABLES_SUCCESS":
       return {
         ...state,
         isFetching: false,
-        songs: action.payload
+        tables: action.payload
       };
-    case "FETCH_SONGS_FAILURE":
+    case "FETCH_TABLES_FAILURE":
       return {
         ...state,
         hasError: true,
@@ -32,14 +44,17 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export const Home = () => {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
 React.useEffect(() => {
     dispatch({
-      type: "FETCH_SONGS_REQUEST"
+      type: "FETCH_TABLES_REQUEST"
     });
-    fetch("http://localhost:3030/tables/", {
+    // fetch("http://localhost:3030/tables/", {
+    // the reason I can do leave out the localhost is I designated port 3030 as a proxy
+    fetch("/tables/", {
       headers: {
         Authorization: `Bearer ${authState.token}`
       }
@@ -53,15 +68,24 @@ React.useEffect(() => {
       })
       .then(resJson => {
         console.log(resJson);
+        console.log("fetch table success")
+        let finalArr = []
+        finalArr = resJson.map(()=>
+            {
+                id: resJson.id;
+                timeSlots: resJson.timeSlots
+            })
         dispatch({
-          type: "FETCH_SONGS_SUCCESS",
+          type: "FETCH_TABLES_SUCCESS",
+        //   let tabArr = tableArrayCons(resJson)
+        //   payload: tableArrayCons(resJson)
           payload: resJson
-        });
-      })
+        })
+    })
       .catch(error => {
         console.log(error);
         dispatch({
-          type: "FETCH_SONGS_FAILURE"
+          type: "FETCH_TABLES_FAILURE"
         });
       });
   }, [authState.token]);

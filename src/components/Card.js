@@ -1,5 +1,5 @@
 import React from "react";
-export const Card = ({ table,users }) => {
+export const Card = ({ table }) => {
     
   return (
     <div className="card">
@@ -9,7 +9,7 @@ export const Card = ({ table,users }) => {
       />
       <div className="content">
         <h2>{table.id}</h2>
-        <span>BY: {users.first_name}</span>
+        <span>{table.timeSlots}</span>
       </div>
     </div>
   );
