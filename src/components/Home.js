@@ -52,9 +52,9 @@ React.useEffect(() => {
     dispatch({
       type: "FETCH_TABLES_REQUEST"
     });
-    // fetch("http://localhost:3030/tables/", {
+    fetch("http://localhost:3030/tables/", {
     // the reason I can do leave out the localhost is I designated port 3030 as a proxy
-    fetch("/tables/", {
+    // fetch("/tables/", {
       headers: {
         Authorization: `Bearer ${authState.token}`
       }
@@ -69,12 +69,12 @@ React.useEffect(() => {
       .then(resJson => {
         console.log(resJson);
         console.log("fetch table success")
-        let finalArr = []
-        finalArr = resJson.map(()=>
-            {
-                id: resJson.id;
-                timeSlots: resJson.timeSlots
-            })
+        // let finalArr = []
+        // finalArr = resJson.map(()=>
+        //     {
+        //         id: resJson.id;
+        //         timeSlots: resJson.timeSlots
+        //     })
         dispatch({
           type: "FETCH_TABLES_SUCCESS",
         //   let tabArr = tableArrayCons(resJson)
@@ -99,8 +99,8 @@ React.useEffect(() => {
         <span className="error">AN ERROR HAS OCCURED</span>
       ) : (
         <>
-          {state.tables.length > 0 &&
-            state.tables.map(table => (
+          {/* {state.tables.length > 0 && */}
+            {state.tables.map(table => (
               <Card key={table.id.toString()} table={table} />
             ))}
         </>

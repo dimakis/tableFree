@@ -60,6 +60,6 @@ function createToken(payload){
   
   server.use(router)
 
-server.listen(3031, () => {
+server.listen(3035, () => {
   console.log('Run Auth API Server')
 })

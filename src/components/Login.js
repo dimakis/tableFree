@@ -26,7 +26,7 @@ const handleFormSubmit = event => {
     });
     let id = data.email
     const token = Buffer.from(`${data.email}:${data.password}`, 'utf8').toString('base64')
-    fetch("http://localhost:3031/users/", {
+    fetch("http://localhost:3035/users/", {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`

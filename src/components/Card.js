@@ -1,17 +1,26 @@
 import React from "react";
 export const Card = ({ table }) => {
+  for (var ts of table.timeSlots)  {
+    var timeSlots =[]
+    timeSlots.push(ts)
+    console.log("timeSlot: " + ts.time + " isBooked? " + ts.isBooked)
+  }
     
   return (
     <div className="card">
-      <img
-        // src={song.albumArt}
-        alt=""
-      />
-      <div className="content">
+      {/* <img */}
+        // src=
+                // alt=""
+      {/* /> */}
+      {/* <div className="content"> */}
+      {console.log(table.id)}
+      {/* {console.log(table)} */}
+      
         <h2>{table.id}</h2>
-        <span>{table.timeSlots}</span>
-      </div>
-    </div>
+        <span>Time: {table.time}</span>
+        <span>isBooked?: {table.isBooked}</span>
+     </div>
+    // </div>
   );
 };
 export default Card;
