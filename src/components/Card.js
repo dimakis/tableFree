@@ -1,5 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
+import { AuthContext } from "../App";
+
 export const Card = ({ table }) => {
+  const context = useContext(AuthContext)
+  
   for (var ts of table.timeSlots)  {
     var timeSlots =[]
     timeSlots.push(ts)
@@ -8,17 +12,18 @@ export const Card = ({ table }) => {
     
   return (
     <div className="card">
-      {/* <img */}
-        // src=
-                // alt=""
-      {/* /> */}
+
       {/* <div className="content"> */}
       {console.log(table.id)}
       {/* {console.log(table)} */}
       
-        <h2>{table.id}</h2>
-        <span>Time: {table.time}</span>
-        <span>isBooked?: {table.isBooked}</span>
+        <h2>Table: {table.id}</h2>
+        <span>Time: {ts.time}</span>
+        <span>isBooked?: {ts.isBooked.toString()}</span>
+        <>
+        {/* {table.timeSlots.time.map( ts =>  */}
+        {/* <p key={ts.time.toString()}> timeSlot:{ts.isBooked}   </p>  */}
+        </>
      </div>
     // </div>
   );

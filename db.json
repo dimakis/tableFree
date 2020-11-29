@@ -25,10 +25,12 @@
       "id": 100,
       "timeSlots": [
         {
-          "time": "12-1", "isBooked": true
+          "time": "12-1",
+          "isBooked": true
         },
         {
-          "time": "1-2", "isBooked": true
+          "time": "1-2",
+          "isBooked": true
         }
       ]
     },
@@ -36,10 +38,12 @@
       "id": 101,
       "timeSlots": [
         {
-          "time": "12-1", "isBooked": true
+          "time": "12-1",
+          "isBooked": true
         },
         {
-          "time": "1-2", "isBooked": true
+          "time": "1-2",
+          "isBooked": true
         }
       ]
     },
@@ -47,10 +51,12 @@
       "id": 102,
       "timeSlots": [
         {
-          "time": "12-1", "isBooked": true
+          "time": "12-1",
+          "isBooked": true
         },
         {
-          "time": "1-2", "isBooked": true
+          "time": "1-2",
+          "isBooked": true
         }
       ]
     }
@@ -209,6 +215,60 @@
     },
     {
       "id": 47
+    },
+    {
+      "id": 48
+    },
+    {
+      "id": 49
+    },
+    {
+      "id": 50
+    },
+    {
+      "id": 51
+    },
+    {
+      "id": 52
+    },
+    {
+      "id": 53
+    },
+    {
+      "id": 54
+    },
+    {
+      "id": 55
+    },
+    {
+      "id": 56
+    },
+    {
+      "id": 57
+    },
+    {
+      "id": 58
+    },
+    {
+      "id": 59
+    },
+    {
+      "id": 60
+    },
+    {
+      "id": 61
+    },
+    {
+      "id": 62
+    },
+    {
+      "id": 63
+    },
+    {
+      "id": 64
+    },
+    {
+      "id": 65
     }
   ],
   "customers": [
