@@ -122,6 +122,9 @@ label{
 #navigation h1{
   color: white;
 }
+a:hover, a:active {
+  color: black;
+}
 #navigation button{
   background-color: transparent;
   border: none;

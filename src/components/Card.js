@@ -3,26 +3,29 @@ import { AuthContext } from "../App";
 
 export const Card = ({ table }) => {
   const context = useContext(AuthContext)
-  
+  let  timeSlots =[]
   for (var ts of table.timeSlots)  {
-    var timeSlots =[]
     timeSlots.push(ts)
-    console.log("timeSlot: " + ts.time + " isBooked? " + ts.isBooked)
+    console.log("timeSlot: " + ts.time)
+
+    console.log("isBooked: " + ts.isBooked)
   }
+  console.log("timeSlot size: " + timeSlots.length)
     
   return (
     <div className="card">
 
       {/* <div className="content"> */}
       {console.log(table.id)}
-      {/* {console.log(table)} */}
+      {console.log('table type: ' + table)}
       
         <h2>Table: {table.id}</h2>
-        <span>Time: {ts.time}</span>
-        <span>isBooked?: {ts.isBooked.toString()}</span>
         <>
-        {/* {table.timeSlots.time.map( ts =>  */}
-        {/* <p key={ts.time.toString()}> timeSlot:{ts.isBooked}   </p>  */}
+        {timeSlots.map( tis => 
+        (
+           <p key={tis.time.toString()}> Time: {tis.time} Is booked: {tis.isBooked.toString()}   </p>  
+        )) 
+    }
         </>
      </div>
     // </div>

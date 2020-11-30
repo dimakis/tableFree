@@ -1,4 +1,5 @@
 import React from "react";
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -37,7 +38,8 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-return (
+  return (
+    <BrowserRouter>    
     <AuthContext.Provider
       value={{
         state,
@@ -46,7 +48,16 @@ return (
     >
       <Header />
       <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+      <Switch>
+        <Route path="/"  />
+        <Redirect from="*" to="/" />
+      </Switch>
     </AuthContext.Provider>
+    </BrowserRouter>
+
   );
 }
 export default App;
+
+
+//      <Route ="/" component={Home} />

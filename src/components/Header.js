@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 export const Header = () => {
   return (
     <nav id="navigation">
-      <h1 href="#" className="logo">
-        TableFree
-      </h1>
+      <Link href="#" className="logo" to="/">
+        <h1>TableFree</h1>
+      </Link>
     </nav>
   );
 };
