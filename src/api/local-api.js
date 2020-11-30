@@ -1,3 +1,16 @@
+import React from "react";
+import { AuthContext } from "../App";
+
+export const CallAPI = ()   => {
+    const { dispatch } = React.useContext(AuthContext);
+
+    // return(
+
+    // );
+ }
+
+
+
 // export async const getUser = (id) => {
 //     return fetch(
 //         `http://localhost:3030/users/${id}`,

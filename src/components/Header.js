@@ -7,6 +7,9 @@ export const Header = () => {
       <Link href="#" className="logo" to="/">
         <h1>TableFree</h1>
       </Link>
+      <Link href="#" className="nav-item" to="/bookingPage">
+        <li>Booking Page</li>
+      </Link>
     </nav>
   );
 };

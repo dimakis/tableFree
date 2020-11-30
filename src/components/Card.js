@@ -23,7 +23,8 @@ export const Card = ({ table }) => {
         <>
         {timeSlots.map( tis => 
         (
-           <p key={tis.time.toString()}> Time: {tis.time} Is booked: {tis.isBooked.toString()}   </p>  
+        <>
+          <Link to=`/pageBooking${tis.id}` key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </Link>  
         )) 
     }
         </>

@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import BookingPage from "./components/BookingPage";
 
 export const AuthContext = React.createContext();
 
@@ -47,9 +48,10 @@ function App() {
       }}
     >
       <Header />
-      <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+      {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
       <Switch>
-        <Route path="/"  />
+        <Route path="/" component= {Home} />
+        <Route path="/bookingPage/:id/" component={BookingPage}/>
         <Redirect from="*" to="/" />
       </Switch>
     </AuthContext.Provider>
