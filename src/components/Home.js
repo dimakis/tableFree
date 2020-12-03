@@ -1,6 +1,7 @@
 import React from "react";
 import { AuthContext } from "../App";
 import Card from "../components/Card";
+import MatCard from "../components/MatCard"
 
 const initialState = {
   tables: [],
@@ -101,7 +102,7 @@ React.useEffect(() => {
         <>
           {/* {state.tables.length > 0 && */}
             {state.tables.map(table => (
-              <Card key={table.id.toString()} table={table} />
+              <MatCard key={table.id.toString()} table={table} />
             ))}
         </>
       )}

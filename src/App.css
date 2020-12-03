@@ -122,6 +122,10 @@ label{
 #navigation h1{
   color: white;
 }
+
+#navigation ul{
+  color: white
+}
 a:hover, a:active {
   color: black;
 }
@@ -137,6 +141,7 @@ a:hover, a:active {
   outline: none !important;
 }
 /******  HEADER  ******/
+
 
 
 /******  HOME PAGE  ******/

@@ -4,7 +4,11 @@ import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import NavBar from "./navBar/index"
 import BookingPage from "./components/BookingPage";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TableSelection from "./components/TableSelection";
+import BookingPageView from "./views/bookingPageView";
 
 export const AuthContext = React.createContext();
 
@@ -40,6 +44,7 @@ const reducer = (state, action) => {
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
+    <React.Fragment>
     <BrowserRouter>    
     <AuthContext.Provider
       value={{
@@ -47,15 +52,19 @@ function App() {
         dispatch
       }}
     >
-      <Header />
+      <NavBar />
+      <TableSelection />
       {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
       <Switch>
         <Route path="/" component= {Home} />
-        <Route path="/bookingPage/:id/" component={BookingPage}/>
+        {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
+        <Route exact path="/bookingPage/:id/" component={BookingPageView}/>
         <Redirect from="*" to="/" />
       </Switch>
     </AuthContext.Provider>
     </BrowserRouter>
+
+</React.Fragment>
 
   );
 }
