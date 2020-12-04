@@ -20,7 +20,7 @@ function App() {
       {/* <AuthContext.Consumer > */}
         <NavBar />
         <TableSelection />
-        <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+        {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
         <Switch>
           <Route path="/" component={HomeTablesView} />
           {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}

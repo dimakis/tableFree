@@ -38,7 +38,8 @@ const reducer = (state, action) => {
 };
 
 export const Home = () => {
-  const { state: authState } = React.useContext(AuthContext);
+  // const { state: authState } = React.useContext(AuthContext);
+  const {state: authState} = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
   React.useEffect(() => {
     dispatch({
@@ -86,7 +87,7 @@ export const Home = () => {
     <React.Fragment>
       <AuthContext.Provider
         value={{
-          state,
+          state:this.state,
           dispatch
         }} >
       </AuthContext.Provider>
