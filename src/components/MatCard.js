@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {Link} from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -24,42 +24,53 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   paragraph: {
-      fontFamily: 'Courier New'
+    fontFamily: 'Courier New'
   }
 });
 
-export default function MatCard({table}) {
+export default function MatCard({ table }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const context = useContext(AuthContext)
-  let  timeSlots =[]
-  for (var ts of table.timeSlots)  {
+  const [selectedTableState, setSelectTableState] = React.useState([]);
+  let timeSlots = []
+  for (var ts of table.timeSlots) {
     timeSlots.push(ts)
-    console.log("timeSlot: " + ts.time)
+    // console.log("timeSlot: " + ts.time)
 
-    console.log("isBooked: " + ts.isBooked)
+    // console.log("isBooked: " + ts.isBooked)
   }
-  console.log("timeSlot size: " + timeSlots.length)
-// if (tis.isBooked)   {
-//     return(
-// <
-//     );
-// }
+  // console.log("timeSlot size: " + timeSlots.length)
+  // if (tis.isBooked)   {
+  //     return(
+  // <
+  //     );
+  const bookTable = e => {
+    e.preventDefault();
+    context.addToTableBooking(table.id);
+  };
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-          <Link to={`/bookingPage/${table.id}`} >
-          <Typography className={classes.paragraph}>
-      <h2>Table: {table.id}</h2>
-        <>
-        {timeSlots.map( tis => 
-        (
-          <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>  
-        )) 
-    }
-        </>
-     </Typography>     
-        </Link>
+
+        {console.log('table.id: ' + table.id)}
+        <Typography className={classes.paragraph}>
+          <h2>Table: {table.id}</h2>
+          <>
+            <Link to={{
+              pathname: `/bookingPage/${table.id}`,
+              state: {
+                table: table,
+              }
+            }} onClick={bookTable}>
+              {timeSlots.map(tis =>
+                (
+                  <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>
+                ))
+              }
+            </Link>
+          </>
+        </Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           Word of the Day
         </Typography>

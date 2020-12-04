@@ -41,7 +41,7 @@ const reducer = (state, action) => {
   }
 };
 
-function App() {
+function Appify() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <React.Fragment>
@@ -56,10 +56,11 @@ function App() {
       <TableSelection />
       {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
       <Switch>
+
+        <Route exact path="/bookingPage/:id/" component={BookingPageView}/>
         <Route path="/" component= {Home} />
         {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
-        <Route exact path="/bookingPage/:id/" component={BookingPageView}/>
-        <Redirect from="*" to="/" />
+        {/* <Redirect from="*" to="/" /> */}
       </Switch>
     </AuthContext.Provider>
     </BrowserRouter>
@@ -68,7 +69,7 @@ function App() {
 
   );
 }
-export default App;
+export default Appify;
 
 
 //      <Route ="/" component={Home} />

@@ -9,17 +9,6 @@ const initialState = {
   hasError: false,
 };
 
-let finalArr = [];
-const tableArrayCons = (obj) => {
-    let finalArr = finalArr.map(function(obj) {
-                  let id =  obj.id;
-                   let timeSlots = obj.timeSlots
-              return {
-                  finalArr
-              }
-          }
-        )
-    };
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,6 +30,10 @@ const reducer = (state, action) => {
         hasError: true,
         isFetching: false
       };
+      case "BOOKING_TABLE":
+        return {
+          tableBooking: state.tables.filter
+        }
     default:
       return state;
   }
@@ -90,6 +83,11 @@ React.useEffect(() => {
         });
       });
   }, [authState.token]);
+  
+  const addToBookingList = (tableID) => {
+    const index = state.tables.map((m) => m.id).indexOf(tableId);
+    dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
+  };
 
   return (
     <React.Fragment>
