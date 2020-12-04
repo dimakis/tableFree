@@ -3,15 +3,16 @@ import BookingPageTemplate from '../bookingPageTemplate/index'
 import { AuthContext } from "../App";
 
 const TableBookingPage = () =>  {
-    const context = useContext(AuthContext);
-    const table = context.table.filter((tab) => {
-            return ( 
+    // const context = useContext(AuthContext);
+    // const table = context.table.filter((tab) => {
+    //         return ( 
 
-            );
-    }
-    )
+    //         );
+    // }
+    // )
     return (
         <BookingPageTemplate />
 
     );
 };
+export default TableBookingPage
