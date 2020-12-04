@@ -1,37 +1,37 @@
-import React, {useContext} from "react";
-import { AuthContext } from "../App";
+// import React, {useContext} from "react";
+// import { AuthContext } from "../App";
 
-export const Card = ({ table }) => {
-  const context = useContext(AuthContext)
-  let  timeSlots =[]
-  for (var ts of table.timeSlots)  {
-    timeSlots.push(ts)
-    console.log("timeSlot: " + ts.time)
+// export const Card = ({ table }) => {
+//   const context = useContext(AuthContext)
+//   let  timeSlots =[]
+//   for (var ts of table.timeSlots)  {
+//     timeSlots.push(ts)
+//     console.log("timeSlot: " + ts.time)
 
-    console.log("isBooked: " + ts.isBooked)
-  }
-  console.log("timeSlot size: " + timeSlots.length)
+//     console.log("isBooked: " + ts.isBooked)
+//   }
+//   console.log("timeSlot size: " + timeSlots.length)
     
-  return (
-    <div className="card">
+//   return (
+//     <div className="card">
 
-      {/* <div className="content"> */}
-      {console.log(table.id)}
-      {console.log('table type: ' + table)}
+//       {/* <div className="content"> */}
+//       {console.log(table.id)}
+//       {console.log('table type: ' + table)}
       
-        <h2>Table: {table.id}</h2>
-        <>
-        {timeSlots.map( tis => 
-        (
-          <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>  
-        )) 
-    }
-        </>
-     </div>
-    // </div>
-  );
-};
-export default Card;
+//         <h2>Table: {table.id}</h2>
+//         <>
+//         {timeSlots.map( tis => 
+//         (
+//           <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>  
+//         )) 
+//     }
+//         </>
+//      </div>
+//     // </div>
+//   );
+// };
+// export default Card;
 
 
 

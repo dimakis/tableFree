@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../contexts/adminContext";
 import getUserDeets, { getUser } from "../api/local-api"
 
 export const Login = () => {

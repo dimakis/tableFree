@@ -1,13 +1,13 @@
-import React from "react";
-import { AuthContext } from "../App";
+// import React from "react";
+// import { AuthContext } from "../App";
 
-export const CallAPI = ()   => {
-    const { dispatch } = React.useContext(AuthContext);
+// export const CallAPI = ()   => {
+//     const { dispatch } = React.useContext(AuthContext);
 
     // return(
 
     // );
- }
+//  }
 
 
 
