@@ -4,15 +4,18 @@ import Card from "../components/Card";
 import Nav from "../navBar/index";
 import MatCard from "../components/MatCard";
 
-const BookingPageTamplate = ({table, timeSlot}) =>    {
+const BookingPageTamplate = (table) =>    {
     const context = useContext(AuthContext)
+    const tableToBook = context.table;
+    const tableId = table.ud;
 
 
     return (
         <>
         <Nav  />
-        <MatCard  key={table.id.toString} table={table}/>
-        {console.log('table: ' + table)}
+        {console.log("table in bookingPageTemplate: " + table)}
+        <MatCard  key={tableId} table={table}/>
+        {/* {console.log('table: ' + table)} */}
         </>
     );
 };

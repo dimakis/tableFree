@@ -1,6 +1,11 @@
-import React, { useContext, createContext } from "react";
+// import React, { useContext, createContext } from "react";
 
 
-export const BookingContext = createContext()
+// export const BookingContext = createContext()
+
+// const initialState = {
+//     table: null
+// }
 
 
+// }

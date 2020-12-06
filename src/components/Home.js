@@ -10,6 +10,7 @@ const initialState = {
 };
 
 
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_TABLES_REQUEST":
@@ -30,10 +31,13 @@ const reducer = (state, action) => {
         hasError: true,
         isFetching: false
       };
-      case "BOOKING_TABLE":
+      case "BOOK_TABLE":
         return {
-          tableBooking: state.tables.filter
-        }
+          ...state,
+          tableForBooking: state.tables.map((tab) =>
+          tab.id === action.payload.table.id ?
+          tab : tab),
+        };
     default:
       return state;
   }
@@ -83,9 +87,9 @@ React.useEffect(() => {
         });
       });
   }, [authState.token]);
-  
-  const addToBookingList = (tableID) => {
-    const index = state.tables.map((m) => m.id).indexOf(tableId);
+
+  const addBookingToTable = (tableID) => {
+    const index = state.tables.map((tab) => tab.id).indexOf(tableID);
     dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
   };
 
@@ -97,12 +101,7 @@ React.useEffect(() => {
       ) : state.hasError ? (
         <span className="error">AN ERROR HAS OCCURED</span>
       ) : (
-        <>
-          {/* {state.tables.length > 0 && */}
-            {state.tables.map(table => (
-              <MatCard key={table.id.toString()} table={table} />
-            ))}
-        </>
+
       )}
     </div>
     </React.Fragment>

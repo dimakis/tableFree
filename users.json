@@ -1,13 +1,13 @@
 {
-  "users": [
-    {
+  "users": [{
       "id": 1,
       "first_name": "John",
       "last_name": "Doe",
       "email": "johndoe@abc.com",
       "username": "john_doe@gmail.com",
       "status": "Terminated",
-      "password": "123456789"
+      "password": "123456789",
+      "isAdmin": true
     },
     {
       "id": 2,
@@ -16,7 +16,8 @@
       "email": "janedoe@abc.com",
       "gender": "Female",
       "status": "New",
-      "password": 123456789
+      "password": 123456789,
+      "isAdmin": false
     },
     {
       "username": "johndoe@abc.com",
@@ -24,8 +25,7 @@
       "id": 3
     }
   ],
-  "customers": [
-    {
+  "customers": [{
       "id": 3,
       "first_name": "Alice",
       "last_name": "Doe",

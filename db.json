@@ -26,10 +26,12 @@
       "timeSlots": [
         {
           "time": "12-1",
-          "isBooked": true
+          "isBooked": true,
+          "bookedBy": ""
         },
         {
           "time": "1-2",
+          "bookedBy": "",
           "isBooked": true
         }
       ]
@@ -39,10 +41,12 @@
       "timeSlots": [
         {
           "time": "12-1",
+          "bookedBy": "",
           "isBooked": true
         },
         {
           "time": "1-2",
+          "bookedBy": "",
           "isBooked": true
         }
       ]
@@ -52,10 +56,12 @@
       "timeSlots": [
         {
           "time": "12-1",
+          "bookedBy": "",
           "isBooked": true
         },
         {
           "time": "1-2",
+          "bookedBy": "",
           "isBooked": true
         }
       ]
@@ -88,7 +94,7 @@
   ],
   "customers": [
     {
-      "id": 3,
+      "id": "C3",
       "first_name": "Alice",
       "last_name": "Doe",
       "email": "alicedoe@abc.com",
@@ -96,7 +102,7 @@
       "status": "Leaving"
     },
     {
-      "id": 4,
+      "id": "C4",
       "first_name": "Bob",
       "last_name": "Doe",
       "email": "bobdoe@abc.com",

@@ -8,7 +8,7 @@ import NavBar from "./navBar/index"
 import BookingPage from "./components/BookingPage";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TableSelection from "./components/TableSelection";
-import BookingPageView from "./views/bookingPageView";
+import BookingPageTemplate from "./bookingPageTemplate/index"
 
 export const AuthContext = React.createContext();
 
@@ -57,7 +57,7 @@ function Appify() {
       {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
       <Switch>
 
-        <Route exact path="/bookingPage/:id/" component={BookingPageView}/>
+        <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}/>
         <Route path="/" component= {Home} />
         {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
         {/* <Redirect from="*" to="/" /> */}

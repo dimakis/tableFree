@@ -45,30 +45,32 @@ export default function MatCard({ table }) {
   //     return(
   // <
   //     );
-  const bookTable = e => {
-    e.preventDefault();
-    context.addToTableBooking(table.id);
-  };
+  // const bookTable = e => {
+  //   e.preventDefault();
+  //   context.addToTableBooking(table.id);
+  // };
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
 
         {console.log('table.id: ' + table.id)}
         <Typography className={classes.paragraph}>
-          <h2>Table: {table.id}</h2>
-          <>
+
             <Link to={{
               pathname: `/bookingPage/${table.id}`,
               state: {
                 table: table,
               }
-            }} onClick={bookTable}>
+            }}>
+          <h2>Table: {table.id}</h2>
+            </Link>
+          <>
+            {/* // }} onClick={bookTable}> */}
               {timeSlots.map(tis =>
                 (
                   <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>
                 ))
               }
-            </Link>
           </>
         </Typography>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
