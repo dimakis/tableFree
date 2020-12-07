@@ -55,10 +55,10 @@ function Appify() {
         >
             <NavBar />
             <TableSelection />
-            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div>
+            {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div> */}
             <Switch>
 
-              <Route exact path="/bookingPage/:id/" component={BookingPageTemplate} />
+              <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}  />
               <Route path="/" component={Home} />
               {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
               {/* <Redirect from="*" to="/" /> */}

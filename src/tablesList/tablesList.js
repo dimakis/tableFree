@@ -25,7 +25,18 @@ const TablesList = ({ tables, action }) => {
     let displayedTable = tables
         .filter(tab => {
             return tab.id === (tableIdFilter) !== -1;
-        })
+        });
+
+
+    const tableBooking = tables =>
+        tables.filter(e => {
+            if (e.state.isBooked)
+                tab = e;
+            return e
+        });
+    let tab = tableBooking(tables);
+    // let tabId = tab.id;
+    { console.log("table in tablesList: " + tab) }
     // this func needs to be altered at a later date for searching by isBooked
     // const handleChange = (type, value) => {
     //     if (type === "name") setNameFilter(value);
@@ -39,7 +50,7 @@ const TablesList = ({ tables, action }) => {
             <>
                 {/* {state.tables.length > 0 && */}
                 {tables.map(table => (
-                            <MatCard key={table.id.toString()} table={table} />
+                    <MatCard key={tab.id.toString()} table={tab} />
 
                 ))}
             </>
