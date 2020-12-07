@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,9 +8,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { AuthContext } from "../App";
+import { Box } from '@material-ui/core';
+import BookingPageTemplate from '../bookingPageTemplate/index'
 
 const useStyles = makeStyles({
   root: {
+    flexgrow: 3,
     minWidth: 275,
   },
   bullet: {
@@ -28,7 +32,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MatCard({ table }) {
+ function MatCard({ table }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const context = useContext(AuthContext)
@@ -49,30 +53,36 @@ export default function MatCard({ table }) {
   //   e.preventDefault();
   //   context.addToTableBooking(table.id);
   // };
-  return (
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
+const tab =({match}) => (
+  <div>
+    {match.params.tableId}
+  </div>
+)
 
+  return (
+    <Router>        <Card className={classes.root} variant="outlined">
+      <CardContent>
         {console.log('table.id: ' + table.id)}
         <Typography className={classes.paragraph}>
-
-            <Link to={{
-              pathname: `/bookingPage/${table.id}`,
-              state: {
-                table: table,
-              }
-            }}>
-          <h2>Table: {table.id}</h2>
-            </Link>
+          <Link to={{
+            pathname: `/bookingPage/${table.id}`,
+            state: {
+              table: table,
+            }
+          }}>
+            <h2>Table: {table.id}</h2>
+          </Link>
           <>
             {/* // }} onClick={bookTable}> */}
-              {timeSlots.map(tis =>
-                (
-                  <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>
-                ))
-              }
+            {timeSlots.map(tis =>
+              (
+                <p key={tis.time.toString()}>  Time: {tis.time} Is booked: {tis.isBooked.toString()} </p>
+              ))
+            }
           </>
         </Typography>
+          <Route path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table} {...props} /> }
+          />
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           Word of the Day
         </Typography>
@@ -92,5 +102,8 @@ export default function MatCard({ table }) {
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
+    </Router>
+
   );
 }
+export default withRouter(MatCard)

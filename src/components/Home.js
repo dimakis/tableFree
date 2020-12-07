@@ -2,6 +2,11 @@ import React from "react";
 import { AuthContext } from "../App";
 import Card from "../components/Card";
 import MatCard from "../components/MatCard"
+import TablesList from "../tablesList/tablesList";
+
+import { Box } from "@material-ui/core";
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 const initialState = {
   tables: [],
@@ -31,13 +36,13 @@ const reducer = (state, action) => {
         hasError: true,
         isFetching: false
       };
-      case "BOOK_TABLE":
-        return {
-          ...state,
-          tableForBooking: state.tables.map((tab) =>
+    case "BOOK_TABLE":
+      return {
+        ...state,
+        tableForBooking: state.tables.map((tab) =>
           tab.id === action.payload.table.id ?
-          tab : tab),
-        };
+            tab : tab),
+      };
     default:
       return state;
   }
@@ -46,13 +51,13 @@ const reducer = (state, action) => {
 export const Home = () => {
   const { state: authState } = React.useContext(AuthContext);
   const [state, dispatch] = React.useReducer(reducer, initialState);
-React.useEffect(() => {
+  React.useEffect(() => {
     dispatch({
       type: "FETCH_TABLES_REQUEST"
     });
     fetch("http://localhost:3030/tables/", {
-    // the reason I can do leave out the localhost is I designated port 3030 as a proxy
-    // fetch("/tables/", {
+      // the reason I can do leave out the localhost is I designated port 3030 as a proxy
+      // fetch("/tables/", {
       headers: {
         Authorization: `Bearer ${authState.token}`
       }
@@ -75,11 +80,11 @@ React.useEffect(() => {
         //     })
         dispatch({
           type: "FETCH_TABLES_SUCCESS",
-        //   let tabArr = tableArrayCons(resJson)
-        //   payload: tableArrayCons(resJson)
+          //   let tabArr = tableArrayCons(resJson)
+          //   payload: tableArrayCons(resJson)
           payload: resJson
         })
-    })
+      })
       .catch(error => {
         console.log(error);
         dispatch({
@@ -95,15 +100,15 @@ React.useEffect(() => {
 
   return (
     <React.Fragment>
-    <div className="home">
-      {state.isFetching ? (
-        <span className="loader">LOADING...</span>
-      ) : state.hasError ? (
-        <span className="error">AN ERROR HAS OCCURED</span>
-      ) : (
-
-      )}
-    </div>
+          <div className="home">
+            {state.isFetching ? (
+              <span className="loader">LOADING...</span>
+            ) : state.hasError ? (
+              <span className="error">AN ERROR HAS OCCURED</span>
+            ) : (
+                  < TablesList tables={state.tables} ></TablesList>
+                )}
+          </div>
     </React.Fragment>
   );
 };

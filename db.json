@@ -89,12 +89,26 @@
       "username": "johndoe@abc.com",
       "password": "123",
       "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
     }
-
   ],
   "customers": [
     {
-      "id": "C3",
+      "id": 3,
       "first_name": "Alice",
       "last_name": "Doe",
       "email": "alicedoe@abc.com",
@@ -102,7 +116,7 @@
       "status": "Leaving"
     },
     {
-      "id": "C4",
+      "id": 4,
       "first_name": "Bob",
       "last_name": "Doe",
       "email": "bobdoe@abc.com",

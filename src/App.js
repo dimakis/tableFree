@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -9,6 +9,7 @@ import BookingPage from "./components/BookingPage";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TableSelection from "./components/TableSelection";
 import BookingPageTemplate from "./bookingPageTemplate/index"
+import { Table } from "@material-ui/core";
 
 export const AuthContext = React.createContext();
 
@@ -45,27 +46,27 @@ function Appify() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <React.Fragment>
-    <BrowserRouter>    
-    <AuthContext.Provider
-      value={{
-        state,
-        dispatch
-      }}
-    >
-      <NavBar />
-      <TableSelection />
-      {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div> */}
-      <Switch>
+      <BrowserRouter>
+        <AuthContext.Provider
+          value={{
+            state,
+            dispatch
+          }}
+        >
+            <NavBar />
+            <TableSelection />
+            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div>
+            <Switch>
 
-        <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}/>
-        <Route path="/" component= {Home} />
-        {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
-        {/* <Redirect from="*" to="/" /> */}
-      </Switch>
-    </AuthContext.Provider>
-    </BrowserRouter>
+              <Route exact path="/bookingPage/:id/" component={BookingPageTemplate} />
+              <Route path="/" component={Home} />
+              {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
+              {/* <Redirect from="*" to="/" /> */}
+            </Switch>
+        </AuthContext.Provider>
+      </BrowserRouter>
 
-</React.Fragment>
+    </React.Fragment>
 
   );
 }
