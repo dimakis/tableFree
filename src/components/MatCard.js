@@ -11,6 +11,8 @@ import { AuthContext } from "../App";
 import { Box } from '@material-ui/core';
 import BookingPageTemplate from '../bookingPageTemplate/index'
 import useToggleState from '../hooks/useToggleState';
+import {Home} from '../components/Home'
+import BookButton from '../components/buttons/bookButton'
 
 const useStyles = makeStyles({
   root: {
@@ -39,6 +41,7 @@ function MatCard({ table }) {
   const context = useContext(AuthContext)
   const [selectedTableState, setSelectTableState] = React.useState([]);
   let timeSlots = []
+  console.log("table in matcard: " + table.id)
   for (var ts of table.timeSlots) {
     timeSlots.push(ts)
     // console.log("timeSlot: " + ts.time)
@@ -59,6 +62,8 @@ function MatCard({ table }) {
       {match.params.tableId}
     </div>
   )
+
+
   const [isBooking, toggle] = useToggleState(false)
   if (!isBooking) {
 
@@ -74,8 +79,9 @@ function MatCard({ table }) {
                   table: table,
                 }
               }}>
-              {console.log( 'table being passed to bpt: ' + table.id) }
-                <h2 onClick={() => toggle()}>Table: {table.id}</h2>
+                {console.log('table being passed to bpt: ' + table.id)}
+                <h2>Table: {table.id}</h2>
+                {/* <Button table={table} key={table.id} /> */}
               </Link>
               <>
                 {/* // }} onClick={bookTable}> */}
@@ -87,7 +93,7 @@ function MatCard({ table }) {
               </>
             </Typography>
 
-            <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table} {...props} tableId={table.id} state={...state} />}
+            <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table.id} tableId={table.id} />}
             />
 
             {/* {console.log('MatCard tableId through props: ' + table.Id)} */}
@@ -120,6 +126,7 @@ function MatCard({ table }) {
 
           <Typography className={classes.paragraph}>
             <h2>Table: {table.id}</h2>
+            {/* <BookButton table={table} key={table.id}/> */}
             <>
               {/* // }} onClick={bookTable}> */}
               {timeSlots.map(tis =>

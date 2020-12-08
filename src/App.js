@@ -49,6 +49,7 @@ function Appify() {
       <BrowserRouter>
         <AuthContext.Provider
           value={{
+            tables:state.tables,
             state,
             dispatch
           }}
@@ -57,9 +58,8 @@ function Appify() {
             <TableSelection />
             {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div> */}
             <Switch>
-
               <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}  />
-              <Route path="/" component={Home} />
+              <Route  exact path="/" component={Home} />
               {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
               {/* <Redirect from="*" to="/" /> */}
             </Switch>

@@ -12,6 +12,7 @@ const initialState = {
   tables: [],
   isFetching: false,
   hasError: false,
+  tableForBooking: null
 };
 
 
@@ -41,7 +42,7 @@ const reducer = (state, action) => {
         ...state,
         tableForBooking: state.tables.map((tab) =>
           tab.id === action.payload.table.id ?
-            tab : tab),
+            {...tab, beingBooked:true} : tab),
       };
     default:
       return state;
@@ -93,7 +94,7 @@ export const Home = () => {
       });
   }, [authState.token]);
 
-  const addBookingToTable = (tableID) => {
+ const addBookingToTable = (tableID) => {
     const index = state.tables.map((tab) => tab.id).indexOf(tableID);
     dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
   };

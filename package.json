@@ -23,7 +23,7 @@
     "eject": "react-scripts eject",
     "start_dbserver": "json-server --watch ./db.json --port 3030",
     "start-auth": "node server.js",
-    "dev": "concurrently \"npm start\" \"npm run start_dbserver\" "
+    "dev": "concurrently \"npm start\" \"npm run start_dbserver\" \"npm run start-auth\" "
   },
   "eslintConfig": {
     "extends": [

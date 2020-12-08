@@ -27,12 +27,15 @@
         {
           "time": "12-1",
           "isBooked": true,
-          "bookedBy": ""
+          "bookedBy": "",
+          "beingBooked": false
         },
         {
           "time": "1-2",
           "bookedBy": "",
-          "isBooked": true
+          "isBooked": true,
+          "beingBooked": false
+
         }
       ]
     },
@@ -42,12 +45,16 @@
         {
           "time": "12-1",
           "bookedBy": "",
-          "isBooked": true
+          "isBooked": true,
+          "beingBooked": false
+
         },
         {
           "time": "1-2",
           "bookedBy": "",
-          "isBooked": true
+          "isBooked": true,
+          "beingBooked": false
+
         }
       ]
     },
@@ -57,12 +64,16 @@
         {
           "time": "12-1",
           "bookedBy": "",
-          "isBooked": true
+          "isBooked": true,
+          "beingBooked": false
+
         },
         {
           "time": "1-2",
           "bookedBy": "",
-          "isBooked": true
+          "isBooked": true,
+          "beingBooked": false
+
         }
       ]
     }

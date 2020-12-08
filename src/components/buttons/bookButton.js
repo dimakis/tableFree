@@ -1,13 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from '../../App'
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { Typography } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
 
 const BookButton = ({ table }) => {
-const handleBookTime = e => {
-    e.preventDefault();
-
-}
-let tableID = table.id
-
+    const context = React.userContext(AuthContext)
+    const classes = useStyles()
+    let tabId = table.id
+    const handleAddToBooking = e => {
+        e.preventDefault();
+        context.addBookingToTable(table.id)
+    }
+    return (
+        <div className={classes.root}>
+            <Button on click={handleAddToBooking} variant="outlined" color="primary" href="#outlined-buttons">
+                    Table {tabId}
+            </Button>
+        </div>
+    )
+};
 //     return (
 //         <>
 //         <Link to=""
@@ -16,10 +37,10 @@ let tableID = table.id
 //         className="btn w-100 btn-primary "
 //             // onClick={() => }
 //      >
-               
+
 //         {/* </button> */}
 //         </>
 //     )
 // };
 
-// export default ReviewButton;
+export default BookButton;
