@@ -39,7 +39,7 @@ const MenuProps = {
   },
 };
 
-const names = [
+const times = [
   '12-1',
   '1-2',
   '3-4',
@@ -51,10 +51,10 @@ const names = [
   '9-10',
 ];
 
-function getStyles(name, personName, theme) {
+function getStyles(time, tableId, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      tableId.indexOf(time) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -63,10 +63,10 @@ function getStyles(name, personName, theme) {
 export default function MultipleSelect() {
   const classes = useStyles();
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [tableId, setTableId] = React.useState([]);
 
   const handleChange = (event) => {
-    setPersonName(event.target.value);
+    setTableId(event.target.value);
   };
 
   const handleChangeMultiple = (event) => {
@@ -77,7 +77,7 @@ export default function MultipleSelect() {
         value.push(options[i].value);
       }
     }
-    setPersonName(value);
+    setTableId(value);
   };
 
   return (
@@ -88,16 +88,16 @@ export default function MultipleSelect() {
           labelId="demo-mutiple-checkbox-label"
           id="demo-mutiple-checkbox"
           multiple
-          value={personName}
+          value={tableId}
           onChange={handleChange}
           input={<Input />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {times.map((time) => (
+            <MenuItem key={time} value={time}>
+              <Checkbox checked={tableId.indexOf(time) > -1} />
+              <ListItemText primary={time} />
             </MenuItem>
           ))}
         </Select>
@@ -109,15 +109,15 @@ export default function MultipleSelect() {
         <Select
           multiple
           native
-          value={personName}
+          value={tableId}
           onChange={handleChangeMultiple}
           inputProps={{
             id: 'select-multiple-native',
           }}
         >
-          {names.map((name) => (
-            <option key={name} value={name}>
-              {name}
+          {times.map((time) => (
+            <option key={time} value={time}>
+              {time}
             </option>
           ))}
         </Select>

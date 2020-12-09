@@ -11,7 +11,11 @@ import GridListTile from '@material-ui/core/GridListTile';
 const TableContext = React.createContext()
 
 const tableBookingInitialState = {
-  table: null
+  tables: [],
+  isFetching: false,
+  hasError: false,
+  isBooking: false,
+  tableForBooking: null
 }
 
 const initialState = {

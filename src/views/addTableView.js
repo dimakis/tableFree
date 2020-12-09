@@ -4,15 +4,27 @@ import { Card, CardContent } from "@material-ui/core";
 import NavBar from "../navBar";
 import TimeSlotDropdown from '../components/timeSlotDropdown'
 import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
+}));
 
 const AddTablePage = props => {
+    const classes = useStyles();
     const context = useContext(AuthContext);
 
     const initialState = {
         tableId: null,
-        timeSlots: "",
-        phoneNumber: "",
-        email: ""
+        timeSlots: [],
+        capacity: "",
+        misc: ""
     }
     const reducer = (state, action) => {
         switch (action.type) {
@@ -44,6 +56,7 @@ const AddTablePage = props => {
     const [state, dispatch] = React.useReducer(reducer, initialState);
     // let tableID = props.id;
     // let tableTime = props.timeSlots.time
+    console.log('authState: ' + authState)
     const handleFormSubmit = event => {
         setData({
             ...data,
@@ -54,16 +67,16 @@ const AddTablePage = props => {
         dispatch({
             type: "ADD_TABLE_REQUEST"
         });
-        fetch(`http://localhost:3030/tables/`, {
+        fetch(`http://localhost:3030/tables/${data.tableId}`, {
             method: "POST",
             headers: {
                 Autherization: `Bearer ${authState.token}`
             },
             body: JSON.stringify({
                 id: data.tableId,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                phoneNumber: data.phoneNumber,
+                timeSlots: data.timeSlots,
+                capacity: data.capacity,
+                misc: data.misc,
                 email: data.email
             })
         })
@@ -98,55 +111,58 @@ const AddTablePage = props => {
     return (
         // <NavBar />
         <Container maxWidth="m">
-          <div className="container">
-            <form onSubmit={handleFormSubmit}>
-              <label htmlFor="firstName">
-                <h2>Table ID:</h2>
+            <form className={classes.root} noValidate autoComplete="off">
+                <div>
+                    <form onSubmit={handleFormSubmit}>
+                        <label htmlFor="tableId">
+                            <h2>Table ID:</h2>
+                            <input
+                                type="text"
+                                value={data.tableId}
+                                onChange={handleInputChange}
+                                name="tableId"
+                                id="tableId"
+                            />
+                        </label>
+                        <TextField onChange={handleInputChange} required id="standard-required" label="Required" defaultValue="Table ID " />
+                        <h2>Table Time Slots</h2>
+                        <TimeSlotDropdown />
+                        <label htmlFor="capacity">
+                            Capacity
                 <input
-                  type="text"
-                  value={data.tableId}
-                  onChange={handleInputChange}
-                  name="firstName"
-                  id="firstName"
-                />
-              </label>
-              <h2>Table Time Slots</h2>
-              <TimeSlotDropdown />
-              <label htmlFor="email">
-                Email Address
+                                type="text"
+                                value={data.capacity}
+                                onChange={handleInputChange}
+                                name="capacity"
+                                id="capacity"
+                            />
+                        </label>
+
+                        <label htmlFor="misc">
+                            Misc:
                 <input
-                  type="text"
-                  value={data.email}
-                  onChange={handleInputChange}
-                  name="email"
-                  id="email"
-                />
-              </label>
-  
-              <label htmlFor="phoneNumber">
-                Phone Number:
-                <input
-                  type="phoneNumber"
-                  value={data.phoneNumber}
-                  onChange={handleInputChange}
-                  name="phoneNumber"
-                  id="phoneNumber"
-                />
-              </label>
-  
-              {data.errorMessage && (
-                <span className="form-error">{data.errorMessage}</span>
-              )}
-             <button disabled={data.isSubmitting}>
-                {data.isSubmitting ? (
-                  "Loading..."
-                ) : (
-                  "Login"
-                )}
-              </button>
+                                type="misc"
+                                value={data.misc}
+                                onChange={handleInputChange}
+                                name="misc"
+                                id="misc"
+                            />
+                        </label>
+
+                        {data.errorMessage && (
+                            <span className="form-error">{data.errorMessage}</span>
+                        )}
+                        <button disabled={data.isSubmitting}>
+                            {data.isSubmitting ? (
+                                "Loading..."
+                            ) : (
+                                    "Submit"
+                                )}
+                        </button>
+                    </form>
+                </div>
             </form>
-          </div>
-          </Container>
-   );
+        </Container>
+    );
 };
 export default AddTablePage;

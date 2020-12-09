@@ -9,7 +9,7 @@ import BookingPage from "./components/BookingPage";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TableSelection from "./components/TableSelection";
 import BookingPageTemplate from "./bookingPageTemplate/index"
-import { Table } from "@material-ui/core";
+import { Table, Typography } from "@material-ui/core";
 import AddTablePage from "./views/addTableView";
 
 export const AuthContext = React.createContext();
@@ -55,6 +55,7 @@ function Appify() {
             dispatch
           }}
         >
+        <Typography >
             <NavBar />
             <TableSelection />
             {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div> */}
@@ -64,6 +65,7 @@ function Appify() {
               <Route path="/addTablePage/" component={AddTablePage}/>
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
+</Typography>
         </AuthContext.Provider>
       </BrowserRouter>
 
