@@ -62,6 +62,9 @@ function MatCard({ table }) {
       {match.params.tableId}
     </div>
   )
+  const addTableToBookingList = tableID =>  {
+    
+  }
 
 
   const [isBooking, toggle] = useToggleState(false)
@@ -80,7 +83,7 @@ function MatCard({ table }) {
                 }
               }}>
                 {console.log('table being passed to bpt: ' + table.id)}
-                <h2>Table: {table.id}</h2>
+                <h2 onClick={addTableToBookingList}>Table: {table.id}</h2>
                 {/* <Button table={table} key={table.id} /> */}
               </Link>
               <>

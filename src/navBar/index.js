@@ -23,9 +23,9 @@ const NavBar = () => {
                         </Typography>
                     </NavLink>
                     <ul>
-                        <NavLink href="#" className={styleClass["& ul"]} to="/bookingPage" >
+                        <NavLink href="#" className={styleClass["& ul"]} to="/addTablePage" >
                         <Typography theme={theme}>
-                            <li>Booking Page</li>
+                            <li>Add tables</li>
                         </Typography>
                         </NavLink>
                     </ul>

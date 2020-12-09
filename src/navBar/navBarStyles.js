@@ -27,7 +27,7 @@ export default makeStyles({
           } 
       },
       '& ul': {
-                   color: 'white',
+          color: 'white',
           fontSize: '1rem',
           fontWeight: '300',
           [sizes.down('xs')]: {

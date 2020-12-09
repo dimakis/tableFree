@@ -8,10 +8,17 @@ import { Box } from "@material-ui/core";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
+const TableContext = React.createContext()
+
+const tableBookingInitialState = {
+  table: null
+}
+
 const initialState = {
   tables: [],
   isFetching: false,
   hasError: false,
+  isBooking: false,
   tableForBooking: null
 };
 
@@ -40,6 +47,7 @@ const reducer = (state, action) => {
     case "BOOK_TABLE":
       return {
         ...state,
+        isBooking: true,
         tableForBooking: state.tables.map((tab) =>
           tab.id === action.payload.table.id ?
             {...tab, beingBooked:true} : tab),
@@ -101,15 +109,24 @@ export const Home = () => {
 
   return (
     <React.Fragment>
-          <div className="home">
+      <AuthContext.Provider
+         value={{
+            tables:state.tables,
+            state,
+            dispatch
+          }}>
+                <div className="home">
             {state.isFetching ? (
               <span className="loader">LOADING...</span>
             ) : state.hasError ? (
               <span className="error">AN ERROR HAS OCCURED</span>
-            ) : (
+            ) : state.isBooking ? (
+                  < TablesList tables={state.tableForBooking} ></TablesList>
+                ): 
                   < TablesList tables={state.tables} ></TablesList>
-                )}
+                }
           </div>
+          </AuthContext.Provider>
     </React.Fragment>
   );
 };

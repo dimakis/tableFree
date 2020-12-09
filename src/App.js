@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TableSelection from "./components/TableSelection";
 import BookingPageTemplate from "./bookingPageTemplate/index"
 import { Table } from "@material-ui/core";
+import AddTablePage from "./views/addTableView";
 
 export const AuthContext = React.createContext();
 
@@ -60,7 +61,7 @@ function Appify() {
             <Switch>
               <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}  />
               <Route  exact path="/" component={Home} />
-              {/* <Route path="/bookingPage/:id/" component={BookingPage}/> */}
+              <Route path="/addTablePage/" component={AddTablePage}/>
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
         </AuthContext.Provider>
