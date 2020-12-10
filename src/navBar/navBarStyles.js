@@ -18,7 +18,7 @@ export default makeStyles({
           }
           }
         },
-        '& h2': {
+        h2: {
           color: 'white',
           fontSize: '1rem',
           fontWeight: '300',

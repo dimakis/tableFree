@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
 import "./App.css";
 import Login from "./components/Login";
@@ -11,8 +11,9 @@ import TableSelection from "./components/TableSelection";
 import BookingPageTemplate from "./bookingPageTemplate/index"
 import { Table, Typography } from "@material-ui/core";
 import AddTablePage from "./views/addTableView";
-
-export const AuthContext = React.createContext();
+import AuthenContext, { AuthContext } from './context/authUserContext'
+import ProtectedRoute from './components/ProtectedRoute'
+// export const AuthContext = React.createContext();
 
 const initialState = {
   isAuthenticated: false,
@@ -44,33 +45,29 @@ const reducer = (state, action) => {
 };
 
 function Appify() {
+  const context = useContext(AuthContext)
   const [state, dispatch] = React.useReducer(reducer, initialState);
   return (
     <React.Fragment>
       <BrowserRouter>
-        <AuthContext.Provider
-          value={{
-            tables:state.tables,
-            state,
-            dispatch
-          }}
-        >
-        <Typography >
+        <AuthenContext>
+
+          {/* <Typography > */}
             <NavBar />
             <TableSelection />
-            {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/' />}</div> */}
+            {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home' />}</div> */}
             <Switch>
-              <Route exact path="/bookingPage/:id/" component={BookingPageTemplate}  />
-              <Route  exact path="/" component={Home} />
-              <Route path="/addTablePage/" component={AddTablePage}/>
+              <Route path='/' component={Login} />
+              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
+              <ProtectedRoute exact path="/bookingPage/:id/" component={BookingPageTemplate} />
+              <ProtectedRoute exact path="/home/" component={Home} />
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
-</Typography>
-        </AuthContext.Provider>
+          {/* </Typography> */}
+    
+      </AuthenContext>
       </BrowserRouter>
-
-    </React.Fragment>
-
+      </React.Fragment>
   );
 }
 export default Appify;

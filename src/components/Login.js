@@ -1,23 +1,25 @@
 import React from "react";
-import { AuthContext } from "../App";
-import getUserDeets, { getUser } from "../api/local-api"
+import AuthenContext, { AuthContext } from "../context/authUserContext";
+import { Link, Route } from 'react-router-dom'
+import ProtectedRoute from "./ProtectedRoute";
+import Home from './Home'
 
 export const Login = () => {
-  const { dispatch } = React.useContext(AuthContext);
+  const { dispatch, FetchTables } = React.useContext(AuthContext);
   const initialState = {
     email: "",
     password: "",
     isSubmitting: false,
     errorMessage: null
   };
-const [data, setData] = React.useState(initialState);
-const handleInputChange = event => {
+  const [data, setData] = React.useState(initialState);
+  const handleInputChange = event => {
     setData({
       ...data,
       [event.target.name]: event.target.value
     });
   };
-const handleFormSubmit = event => {
+  const handleFormSubmit = event => {
     event.preventDefault();
     setData({
       ...data,
@@ -37,15 +39,17 @@ const handleFormSubmit = event => {
       })
     })
       .then(res => {
-         if (res.ok) {
+        if (res.ok) {
           return res.json();
         }
         throw res;
       })
       .then(resJson => {
+        console.log("token: " + token)
+        AuthenContext()
         dispatch({
-            type: "LOGIN",
-            payload: resJson
+          type: "LOGIN",
+          payload: resJson
         })
       })
       .catch(error => {
@@ -56,14 +60,14 @@ const handleFormSubmit = event => {
         });
       });
   };
-return (
+  return (
     <div className="login-container">
       <div className="card">
         <div className="container">
           <form onSubmit={handleFormSubmit}>
             <h1>Login</h1>
 
-			<label htmlFor="email">
+            <label htmlFor="email">
               Email Address
               <input
                 type="text"
@@ -74,7 +78,7 @@ return (
               />
             </label>
 
-			<label htmlFor="password">
+            <label htmlFor="password">
               Password
               <input
                 type="password"
@@ -85,16 +89,19 @@ return (
               />
             </label>
 
-			{data.errorMessage && (
+            {data.errorMessage && (
               <span className="form-error">{data.errorMessage}</span>
             )}
-
-           <button disabled={data.isSubmitting}>
-              {data.isSubmitting ? (
-                "Loading..."
-              ) : (
-                "Login"
-              )}
+            <button disabled={data.isSubmitting}>
+              <Link to={`/home/`} >
+                {data.isSubmitting ? (
+                  "Loading..."
+                ) : (
+                    "Login"
+                  )}
+              </Link>
+              {/* <Route */}
+              {/* // path={`/home/`} /> */}
             </button>
           </form>
         </div>

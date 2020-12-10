@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../context/authUserContext";
 import Card from "../components/Card";
 import Nav from "../navBar/index";
 import MatCard from "../components/MatCard";
@@ -7,7 +7,7 @@ import useToggleState from '../hooks/useToggleState'
 
 const BookingPageTamplate = ({ table, tableId }) => {
     const context = useContext(AuthContext)
-    const tableToBook = context.table;
+    const tableToBook = context.tableForBooking;
     // const tableId = table.id;
     // const table = props.params.table
     // const tables = context.tables.map(tab =>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../context/authUserContext";
 
 const BookingPage = props => {
     const context = useContext(AuthContext);

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../context/authUserContext";
 import { Card, CardContent } from "@material-ui/core";
 import NavBar from "../navBar";
 import TimeSlotDropdown from '../components/timeSlotDropdown'

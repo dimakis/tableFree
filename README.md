@@ -3,6 +3,9 @@ json-server db.json --port 3030 -m ./node_modules/json-server-auth
 ref:
 https://www.npmjs.com/package/json-server-auth
 
+# for private routes
+https://medium.com/javascript-in-plain-english/how-to-set-up-protected-routes-in-your-react-application-a3254deda380
+
 # for some nice housekeeping involving the servers
 https://medium.com/@joelazarz/using-concurrently-with-json-server-and-your-react-app-3d07487acc50
 

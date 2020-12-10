@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../context/authUserContext";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -25,7 +25,7 @@ const TablesList = ({ tables, action }) => {
     let displayedTable = tables
         .filter(tab => {
             if (tab.isBooking)
-            return tab.id === (tableIdFilter) !== -1;
+                return tab.id === (tableIdFilter) !== -1;
         });
 
 
@@ -44,7 +44,7 @@ const TablesList = ({ tables, action }) => {
     //     else setGenreFilter(value);
     //   };
     //     tables.map(table => (
-
+    console.log("tableList: " + tables)
     return (
 
         <>
