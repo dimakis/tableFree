@@ -4,7 +4,7 @@ import { Link, Route } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
 
-export const Login = () => {
+export const Login = (props) => {
   const { dispatch } = React.useContext(AuthContext);
   const initialState = {
     email: "",
@@ -59,6 +59,7 @@ export const Login = () => {
         });
       });
   };
+  console.log("@login, token: " + token)
   return (
     <div className="login-container">
       <div className="card">

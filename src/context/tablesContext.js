@@ -45,6 +45,7 @@ const reducer = (state, action) => {
                 ...state,
                 isBooking: true,
                 tableForBooking: action.payload,
+                
             };
         default:
             return state;

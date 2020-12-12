@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Link, BrowserRouter as Router, Route, withRouter, useHistory } from "react-router-dom";
 import { TablesContext, TablesDispatchContext } from '../../context/tablesContext'
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,6 +8,7 @@ import { Typography } from "@material-ui/core";
 import BookTwoToneIcon from '@material-ui/icons/BookTwoTone';
 import useToggleState from '../../hooks/useToggleState'
 import TableBookingPage from '../../views/bookingPageView'
+import RedirectCom from '../RedirectComponent'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,10 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-    const routeChange = (table) => {
-        
-    }
+
 const BookButton = ({ table }) => {
+    const [redirectState, setRedirectState] = useState(false)
     const context = React.useContext(TablesContext)
     const dispatchContext = React.useContext(TablesDispatchContext)
 
@@ -32,16 +32,21 @@ const BookButton = ({ table }) => {
     const state = context.state
     const [isBooking, toggle] = useToggleState(false)
 
+    let redirectTo
+    const navigate = state => {
+
+    }
 
     const handleAddToBooking = e => {
         // e => isBooking.toggle()a
-        console.log("@bookButton, handleAddTooBooking")
+        console.log("@bookButton, handleAddTooBooking, table: " + table)
         e.preventDefault();
         dispatchContext({ type: "BOOK_TABLE", payload: table })
         context.addBookingToTable(table.id)
         let path = `/bookingPage/${table.id}`
-        window.history.pushState(path)    }
-
+        setRedirectState(true)
+        // <RedirectCom path={path}   />
+    }
     return (
         <div className={classes.root}>
             <Router>
@@ -50,13 +55,17 @@ const BookButton = ({ table }) => {
                     table: { table },
                     state: { ...state },
                 }}>
-                    <Button onClick={handleAddToBooking} table={table} size={"large"} color="primary" component={TableBookingPage} >
+                    <Button onClick={handleAddToBooking} table={table} size={"large"} color="primary"  >
                         <h2>Table {tabId}-></h2>
                         <BookTwoToneIcon className={classes.root} />
                     </Button>
+                    {state.isBooking ? <Redirect to={{
+                        pathname: `/bookingPage/${table.id}`,
+                        table: { table },
+                        state: { ...state },
+                    }} /> : null}
+                    {/* return(<Redirect table={table} to="BookingPage" />) */}
 
-                    return(<Redirect table={table} to="BookingPage" />)
-            
                 </Link>
             </Router>
         </div>
@@ -77,4 +86,4 @@ const BookButton = ({ table }) => {
 //     )
 // };
 
-export default withRouter(BookButton);
+export default withRouter(BookButton)

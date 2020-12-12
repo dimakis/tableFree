@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Link , withRouter} from 'react-router-dom';
 import "./App.css";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -12,7 +12,7 @@ import BookingPageTemplate from "./bookingPageTemplate/index"
 import { Table, Typography } from "@material-ui/core";
 import AddTablePage from "./views/addTableView";
 import ProtectedRoute from './components/ProtectedRoute'
-import TabContextProvider from "./context/tablesContext";
+import TabContextProvider, { TablesDispatchContext } from "./context/tablesContext";
 import BookingPageView from './views/bookingPageView'
 
 
@@ -21,7 +21,7 @@ export const AuthContext = React.createContext();
 const initialState = {
   isAuthenticated: false,
   user: null,
-  token: null,
+  token: 1,
 };
 
 const reducer = (state, action) => {
@@ -60,15 +60,16 @@ function Appify() {
           }}
         >
           <TabContextProvider>
+            
             {/* <Typography > */}
 
             <NavBar />
             <TableSelection />
-            {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home' />}</div> */}
+            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home' />}</div>
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
+              <Route path="/bookingPage/" component={BookingPageView} />
               <Route exact path="/addTablePage/" component={AddTablePage} />
-              <Route exact path="/bookingPage/:id/" component={BookingPageView} />
               <Route exact path="/" component={Home} />
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
@@ -79,7 +80,7 @@ function Appify() {
     </React.Fragment>
   );
 }
-export default Appify;
+export default Appify
 
 
 //      <Route ="/" component={Home} />
