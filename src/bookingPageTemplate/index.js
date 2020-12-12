@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import {TablesContext} from "../context/tablesContext";
+import {TablesContext, TablesDispatchContext} from "../context/tablesContext";
 import Card from "../components/Card";
 import Nav from "../navBar/index";
 import MatCard from "../components/MatCard";
@@ -9,6 +9,7 @@ import TablesList from "../tablesList/tablesList";
 const BookingPageTamplate = ({ table, tableId, action}) => {
     
     const tablesContext = useContext(TablesContext)
+    const dispatchContext = useContext(TablesDispatchContext)
     // const  = context.tableForBooking;
     // const tableId = table.id;
     // const table = props.params.table
