@@ -1,31 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TablesContext from '../../context/tablesContext'
+import { TablesContext } from '../../context/tablesContext'
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/Button';
 import { Typography } from "@material-ui/core";
+import BookTwoToneIcon from '@material-ui/icons/BookTwoTone';
+import useToggleState from '../../hooks/useToggleState'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
         },
+        icon: {
+            minWidth: '30px'
+        }
     },
 }));
 
 const BookButton = ({ table }) => {
-    const context = React.userContext(TablesContext)
+    const context = React.useContext(TablesContext)
     const classes = useStyles()
-    let tabId = table.id
+    const tabId = table.id
+    const state = context.state
+    const [isBooking, toggle] = useToggleState(false)
+
+
+
+
+
     const handleAddToBooking = e => {
+        // e => isBooking.toggle()a
+        console.log("@bookButton, handleAddTooBooking")
         e.preventDefault();
         context.addBookingToTable(table.id)
     }
     return (
         <div className={classes.root}>
-            <Button on click={handleAddToBooking} variant="outlined" color="primary" href="#outlined-buttons">
-                    Table {tabId}
-            </Button>
+            <Link to={{
+                pathname: `/bookingPage/${table.id}`,
+                table: { table },
+                state: { ...state },
+            }}>
+                <IconButton on click={handleAddToBooking} size={"large"} color="primary" href="#outlined-buttons">
+                    <h2>Table {tabId}-></h2>
+                    <BookTwoToneIcon className={classes.root} />
+                </IconButton>
+                {/* <Route 
+            exact path="/bookingPage/:id/"
+            table= */}
+            </Link>
         </div>
     )
 };

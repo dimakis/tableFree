@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom'
 
 
 export const TablesContext = React.createContext();
+export const TablesDispatchContext = React.createContext();
 
 const initialState = {
     isAuthenticated: false,
@@ -57,6 +58,7 @@ export const TabContextProvider = (props) => {
     // const log = 
 
     const addBookingToTable = (tableID) => {
+        console.log("@tablesContext: in addBookingToTables ")
         const index = state.tables.map((tab) => tab.id).indexOf(tableID);
         dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
         // console.log("tablesContext.js addBookingToTable foo " + payload)
@@ -116,7 +118,11 @@ export const TabContextProvider = (props) => {
                     dispatch: dispatch,
                 }}
             >
+                <TablesDispatchContext.Provider
+                    value={dispatch}
+                >                    
                 {props.children}
+                </TablesDispatchContext.Provider>
             </TablesContext.Provider>
         </React.Fragment>
     )

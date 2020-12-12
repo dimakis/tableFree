@@ -5,10 +5,10 @@ import { TablesContext } from "../context/tablesContext";
 import BookButton from "../components/buttons/bookButton";
 import useToggleState from '../hooks/useToggleState'
 
-const TableBookingPage = () =>  {
+const TableBookingPage = (table) =>  {
     const tablesContext = useContext(TablesContext)
-    const table = tablesContext.tableForBooking
-    const [isBooking, toggle] = useToggleState(true)
+    // const tableT = tablesContext.tableForBooking
+    const [isBooking, toggle] = useToggleState(false)
     // const {id} = props.id
     // const table = props.table
     // const context = useContext(AuthContext);
@@ -18,6 +18,11 @@ const TableBookingPage = () =>  {
     //         );
     // }
     // )
+
+    console.log("@tableBP, tableToBook: " + tablesContext.tableToBook)
+    console.log("@tableBP, tables: " + tablesContext.tables)
+    console.log("@tableBP, isBooking: " + isBooking)
+    console.log("@tableBP, table: " + table)
     return (
         <BookingPageTemplate
         isBooking = {isBooking}

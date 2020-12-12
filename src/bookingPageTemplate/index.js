@@ -8,7 +8,7 @@ import TablesList from "../tablesList/tablesList";
 
 const BookingPageTamplate = ({ table, tableId, action}) => {
     
-    const TablesContext = useContext(TablesContext)
+    const tablesContext = useContext(TablesContext)
     // const  = context.tableForBooking;
     // const tableId = table.id;
     // const table = props.params.table

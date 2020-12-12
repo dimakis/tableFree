@@ -13,12 +13,12 @@ import BookingPageTemplate from '../bookingPageTemplate/index'
 import useToggleState from '../hooks/useToggleState';
 import { Home } from '../components/Home'
 import BookButton from '../components/buttons/bookButton'
-import TablesContext, { TabContextProvider } from '../context/tablesContext';
+import {TablesContext, TabContextProvider } from '../context/tablesContext';
 
 const useStyles = makeStyles({
   root: {
     flexgrow: 3,
-    minWidth: 300,
+    minWidth: 340,
   },
   bullet: {
     display: 'inline-block',
@@ -42,6 +42,7 @@ function MatCard({ table, action, isBooking }) {
   const authContext = useContext(AuthContext)
   const tablesContext = useContext(TablesContext)
   const [selectedTableState, setSelectTableState] = React.useState([]);
+  const state = tablesContext.state;
   let timeSlots = []
   console.log("table in matcard: " + table.id)
   for (var ts of table.timeSlots) {
@@ -75,67 +76,67 @@ function MatCard({ table, action, isBooking }) {
                 {/* <Button table={table} key={table.id} /> */}
   console.log("@matCard, isBooking?: " + isBooking)
   // if (tableToBook === null) {
-  if (!isBooking) {
+  // if (isBooking) {
 
-    return (
-      <Router>
-        <Card className={classes.root} variant="outlined">
-          <CardContent>
-            {console.log('table.id: ' + table.id)}
-            <Typography className={classes.paragraph}>
-              <Link to={{
-                pathname: `/bookingPage/${table.id}`,
-                state: {
-                  table: table,
-                },
-              }}>
-                <h2 onClick={addTableToBookingList}>Table: {table.id}</h2>
-              </Link>
-              {action(table)}
-              <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table} tableId={table.id} />}
-              />
-              <>
-                {/* // }} onClick={bookTable}> */}
-                {timeSlots.map(tis =>
-                  (
-                    <p key={tis.time.toString()}>  Time: {tis.time}, Is booked: {tis.isBooked.toString()} </p>
-                  ))
-                }
-              </>
-            </Typography>
+  //   return (
+  //     <Router>
+  //       <Card className={classes.root} variant="outlined">
+  //         <CardContent>
+  //           {console.log('table.id: ' + table.id)}
+  //           <Typography className={classes.paragraph}>
+  //             <Link to={{
+  //               pathname: `/bookingPage/${table.id}`,
+  //               state: {
+  //                 table: table,
+  //               },
+  //             }}>
+  //               <h2 onClick={addTableToBookingList}>Table: {table.id}</h2>
+  //             </Link>
+  //             {action(table)}
+  //             <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table} tableId={table.id} />}
+  //             />
+  //             <>
+  //               {/* // }} onClick={bookTable}> */}
+  //               {timeSlots.map(tis =>
+  //                 (
+  //                   <p key={tis.time.toString()}>  Time: {tis.time}, Is booked: {tis.isBooked.toString()} </p>
+  //                 ))
+  //               }
+  //             </>
+  //           </Typography>
 
 
-            {/* {console.log('MatCard tableId through props: ' + table.Id)} */}
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-              Word of the Day
-        </Typography>
-            <Typography variant="h5" component="h2">
-              be{bull}nev{bull}o{bull}lent
-        </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              adjective
-        </Typography>
-            <Typography variant="body2" component="p">
-              well meaning and kindly.
-          <br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      </Router>
-    );
-  } else {
+  //           {/* {console.log('MatCard tableId through props: ' + table.Id)} */}
+  //           <Typography className={classes.title} color="textSecondary" gutterBottom>
+  //             Word of the Day
+  //       </Typography>
+  //           <Typography variant="h5" component="h2">
+  //             be{bull}nev{bull}o{bull}lent
+  //       </Typography>
+  //           <Typography className={classes.pos} color="textSecondary">
+  //             adjective
+  //       </Typography>
+  //           <Typography variant="body2" component="p">
+  //             well meaning and kindly.
+  //         <br />
+  //             {'"a benevolent smile"'}
+  //           </Typography>
+  //         </CardContent>
+  //         <CardActions>
+  //           <Button size="small">Learn More</Button>
+  //         </CardActions>
+  //       </Card>
+  //     </Router>
+  //   );
+  // } else {
     return (
       <TabContextProvider>
         <Card className={classes.root} variant="outlined">
           <CardContent>
 
             <Typography className={classes.paragraph}>
-              <h2>Table: {table.id}</h2>
-              {/* <BookButton table={table} key={table.id}/> */}
+           
+              <BookButton table={table} key={table.id}/> 
               <>
                 {/* // }} onClick={bookTable}> */}
                 {timeSlots.map(tis =>
@@ -151,5 +152,5 @@ function MatCard({ table, action, isBooking }) {
 
     )
   }
-}
+// }
 export default withRouter(MatCard)
