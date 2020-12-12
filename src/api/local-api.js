@@ -1,8 +1,19 @@
 import React from "react";
 import { AuthContext } from "../context/authUserContext";
 
+const getMovies()
+
+
+
+
+
+
+
+
+
 export const CallAPI = ()   => {
     const { dispatch } = React.useContext(AuthContext);
+
 
     // return(
 

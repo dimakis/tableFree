@@ -1,11 +1,11 @@
 import React from "react";
-import AuthenContext, { AuthContext } from "../context/authUserContext";
+import { AuthContext } from "../App";
 import { Link, Route } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
 
 export const Login = () => {
-  const { dispatch, FetchTables } = React.useContext(AuthContext);
+  const { dispatch } = React.useContext(AuthContext);
   const initialState = {
     email: "",
     password: "",
@@ -46,7 +46,6 @@ export const Login = () => {
       })
       .then(resJson => {
         console.log("token: " + token)
-        AuthenContext()
         dispatch({
           type: "LOGIN",
           payload: resJson
@@ -100,8 +99,8 @@ export const Login = () => {
                     "Login"
                   )}
               </Link>
-              {/* <Route */}
-              {/* // path={`/home/`} /> */}
+              <Route
+               path={`/home/`} /> 
             </button>
           </form>
         </div>

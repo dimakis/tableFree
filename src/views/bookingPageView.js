@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import BookingPageTemplate from '../bookingPageTemplate/index'
 import { AuthContext } from "../App";
+import { TablesContext } from "../context/tablesContext";
+import BookButton from "../components/buttons/bookButton";
+import useToggleState from '../hooks/useToggleState'
 
-const TableBookingPage = props =>  {
+const TableBookingPage = () =>  {
+    const tablesContext = useContext(TablesContext)
+    const table = tablesContext.tableForBooking
+    const [isBooking, toggle] = useToggleState(true)
     // const {id} = props.id
     // const table = props.table
-    console.log('props: ' + props) //+ '\ntable: ' + table)
     // const context = useContext(AuthContext);
     // const table = context.table.filter((tab) => {
     //         return ( 
@@ -15,6 +20,11 @@ const TableBookingPage = props =>  {
     // )
     return (
         <BookingPageTemplate
+        isBooking = {isBooking}
+        table = {table}
+        action = {(table) =>     {
+            return <BookButton table={table} />
+        }}
         // table={table} />
 />
     );

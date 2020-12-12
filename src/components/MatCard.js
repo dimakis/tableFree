@@ -7,12 +7,13 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { AuthContext } from "../context/authUserContext";
+import { AuthContext } from "../App";
 import { Box } from '@material-ui/core';
 import BookingPageTemplate from '../bookingPageTemplate/index'
 import useToggleState from '../hooks/useToggleState';
-import {Home} from '../components/Home'
+import { Home } from '../components/Home'
 import BookButton from '../components/buttons/bookButton'
+import TablesContext, { TabContextProvider } from '../context/tablesContext';
 
 const useStyles = makeStyles({
   root: {
@@ -35,10 +36,11 @@ const useStyles = makeStyles({
   }
 });
 
-function MatCard({ table }) {
+function MatCard({ table, action, isBooking }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-  const context = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
+  const tablesContext = useContext(TablesContext)
   const [selectedTableState, setSelectTableState] = React.useState([]);
   let timeSlots = []
   console.log("table in matcard: " + table.id)
@@ -62,12 +64,17 @@ function MatCard({ table }) {
       {match.params.tableId}
     </div>
   )
-  const addTableToBookingList = tableID =>  {
-    
+  const addTableToBookingList = tableID => {
+    const tableToBook = tablesContext.tables.filter((tabl) => {
+      return tableID === tabl.id
+    }
+    )
+
   }
 
-
-  const [isBooking, toggle] = useToggleState(false)
+                {/* <Button table={table} key={table.id} /> */}
+  console.log("@matCard, isBooking?: " + isBooking)
+  // if (tableToBook === null) {
   if (!isBooking) {
 
     return (
@@ -80,12 +87,13 @@ function MatCard({ table }) {
                 pathname: `/bookingPage/${table.id}`,
                 state: {
                   table: table,
-                }
+                },
               }}>
-                {console.log('table being passed to bpt: ' + table.id)}
                 <h2 onClick={addTableToBookingList}>Table: {table.id}</h2>
-                {/* <Button table={table} key={table.id} /> */}
               </Link>
+              {action(table)}
+              <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table} tableId={table.id} />}
+              />
               <>
                 {/* // }} onClick={bookTable}> */}
                 {timeSlots.map(tis =>
@@ -96,8 +104,6 @@ function MatCard({ table }) {
               </>
             </Typography>
 
-            <Route exact path="/bookingPage/:tableId" render={props => <BookingPageTemplate table={table.id} tableId={table.id} />}
-            />
 
             {/* {console.log('MatCard tableId through props: ' + table.Id)} */}
             <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -120,27 +126,29 @@ function MatCard({ table }) {
           </CardActions>
         </Card>
       </Router>
-
     );
   } else {
     return (
-      <Card className={classes.root} variant="outlined">
-        <CardContent>
+      <TabContextProvider>
+        <Card className={classes.root} variant="outlined">
+          <CardContent>
 
-          <Typography className={classes.paragraph}>
-            <h2>Table: {table.id}</h2>
-            {/* <BookButton table={table} key={table.id}/> */}
-            <>
-              {/* // }} onClick={bookTable}> */}
-              {timeSlots.map(tis =>
-                (
-                  <p key={tis.time.toString()}>  Time: {tis.time}, Is booked: {tis.isBooked.toString()} </p>
-                ))
-              }
-            </>
-          </Typography>
-        </CardContent>
-      </Card>
+            <Typography className={classes.paragraph}>
+              <h2>Table: {table.id}</h2>
+              {/* <BookButton table={table} key={table.id}/> */}
+              <>
+                {/* // }} onClick={bookTable}> */}
+                {timeSlots.map(tis =>
+                  (
+                    <p key={tis.time.toString()}>  Time: {tis.time}, Is booked: {tis.isBooked.toString()} </p>
+                  ))
+                }
+              </>
+            </Typography>
+          </CardContent>
+        </Card>
+      </TabContextProvider>
+
     )
   }
 }

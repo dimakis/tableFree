@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/authUserContext";
+import { AuthContext } from "../App";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MatCard from '../components/MatCard'
 import { Box } from "@material-ui/core";
+import {TablesContext,  TabContextProvider } from '../context/tablesContext'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,15 +19,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TablesList = ({ tables, action }) => {
-    const context = useContext(AuthContext);
+const TablesList = ({ isBooking, tableForBooking, tables, action }) => {
+    const context = useContext(TablesContext);
     const classes = useStyles();
     const [tableIdFilter, setTableIdFilter] = useState("")
-    let displayedTable = tables
-        .filter(tab => {
-            if (tab.isBooking)
-                return tab.id === (tableIdFilter) !== -1;
-        });
+    const tab4book = context.tableForBooking;
+    console.log("@tablesList, tab4Book through context grab: " + tab4book +"\ntab4Book typeof:" + typeof tab4book)
+    // let displayedTable = tables
+    //     .filter(tab => {
+    //         if (tab.isBooking)
+    //             return tab.id === (tableIdFilter) !== -1;
+    //     });
 
 
     // const tableBooking = tables =>
@@ -45,16 +48,26 @@ const TablesList = ({ tables, action }) => {
     //   };
     //     tables.map(table => (
     console.log("tableList: " + tables)
+    console.log("@tableList, isBooking?: "+ isBooking)
     return (
-
-        <>
+               <>
             {/* {state.tables.length > 0 && */}
-            {tables.map(table => (
+            {isBooking ?
+
+                // console.log("@tableList, table isBooking: true\ntypeof" + typeof table) &&
                 <div className={classes.root}>
-                    <MatCard key={table.id.toString()} table={table} />
+                    <MatCard key={tableForBooking.id.toString()} table={tableForBooking} />
                 </div>
-            ))}
+                : tables.map(table => (
+                    <div className={classes.root}>
+                        <MatCard key={table.id.toString()} table={table} />
+                    </div>
+                ))
+                // &&
+                // console.log("@tableList, table isBooking: false\ntypof" + typeof table)
+            }
         </>
+
     )
 };
 export default TablesList

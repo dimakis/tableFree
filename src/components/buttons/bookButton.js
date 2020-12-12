@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from '../../context/authUserContext'
+import TablesContext from '../../context/tablesContext'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Typography } from "@material-ui/core";
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BookButton = ({ table }) => {
-    const context = React.userContext(AuthContext)
+    const context = React.userContext(TablesContext)
     const classes = useStyles()
     let tabId = table.id
     const handleAddToBooking = e => {

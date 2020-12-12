@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthenContext, { AuthContext } from "../context/authUserContext";
+import { AuthContext } from "../App";
 import Card from "../components/Card";
 import MatCard from "../components/MatCard"
 import TablesList from "../tablesList/tablesList";
@@ -7,8 +7,9 @@ import TablesList from "../tablesList/tablesList";
 import { Box } from "@material-ui/core";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import { TablesContext, TabContextProvider } from "../context/tablesContext";
+import useToggleState from "../hooks/useToggleState";
 
-const TableContext = React.createContext()
 
 const initialState = {
   tables: [],
@@ -54,7 +55,11 @@ const reducer = (state, action) => {
 };
 
 export const Home = () => {
-  const context = useContext(AuthContext)
+  const authContext = useContext(AuthContext)
+  const tablesContext = useContext(TablesContext)
+  const isBooking = tablesContext.isBooking;
+  // console.log('context: ' + context)
+
   // const { state: authState } = React.useContext(AuthContext);
   // const [state, dispatch] = React.useReducer(reducer, initialState);
   // React.useEffect(() => {
@@ -103,20 +108,31 @@ export const Home = () => {
   //   const index = state.tables.map((tab) => tab.id).indexOf(tableID);
   //   dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
   // };
+  // const setHomeState = (isBooking) => {
+  //   return isBooking ? isBooking.useToggleState() : isBooking
+  // }
+  // setHomeState(isBooking)
+  console.log("@Home, tablesContext.tables" + tablesContext.tables)
 
   return (
     <React.Fragment>
+      <TabContextProvider>
         <div className="home">
-          {context.state.isFetching ? (
+          {tablesContext.state.isFetching ? (
             <span className="loader">LOADING...</span>
-          ) : context.state.hasError ? (
+          ) : tablesContext.state.hasError ? (
             <span className="error">AN ERROR HAS OCCURED</span>
-          ) : context.state.isBooking ? (
-            < TablesList tables={context.state.tableForBooking} ></TablesList>
           ) :
-                < TablesList tables={context.state.tables} ></TablesList>
+              tablesContext.state.isBooking ?
+                (
+                // console.log("@Home in rtn, table isBooking: true\ntypof" + typeof table) &&
+                  < TablesList isBooking={isBooking} tables={tablesContext.state.tableForBooking} ></TablesList>
+                ) :
+                // console.log("@Home in rtn, table isBooking: false\ntypof" + typeof table) &&
+                < TablesList isBooking={isBooking} tables={tablesContext.tables} ></TablesList>
           }
         </div>
+      </TabContextProvider>
     </React.Fragment>
   );
 };

@@ -11,9 +11,12 @@ import TableSelection from "./components/TableSelection";
 import BookingPageTemplate from "./bookingPageTemplate/index"
 import { Table, Typography } from "@material-ui/core";
 import AddTablePage from "./views/addTableView";
-import AuthenContext, { AuthContext } from './context/authUserContext'
 import ProtectedRoute from './components/ProtectedRoute'
-// export const AuthContext = React.createContext();
+import TabContextProvider from "./context/tablesContext";
+import BookingPageView from './views/bookingPageView'
+
+
+export const AuthContext = React.createContext();
 
 const initialState = {
   isAuthenticated: false,
@@ -50,24 +53,30 @@ function Appify() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <AuthenContext>
+        <AuthContext.Provider
+          value={{
+            state,
+            dispatch
+          }}
+        >
+          <TabContextProvider>
+            {/* <Typography > */}
 
-          {/* <Typography > */}
             <NavBar />
             <TableSelection />
             {/* <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home' />}</div> */}
             <Switch>
-              <Route path='/' component={Login} />
-              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
-              <ProtectedRoute exact path="/bookingPage/:id/" component={BookingPageTemplate} />
-              <ProtectedRoute exact path="/home/" component={Home} />
+              {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
+              <Route exact path="/addTablePage/" component={AddTablePage} />
+              <Route exact path="/bookingPage/:id/" component={BookingPageView} />
+              <Route exact path="/" component={Home} />
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
-          {/* </Typography> */}
-    
-      </AuthenContext>
+            {/* </Typography> */}
+          </TabContextProvider>
+        </AuthContext.Provider>
       </BrowserRouter>
-      </React.Fragment>
+    </React.Fragment>
   );
 }
 export default Appify;

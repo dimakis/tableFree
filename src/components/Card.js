@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { AuthContext } from "../context/authUserContext";
+import { AuthContext } from "../App";
 
 export const Card = ({ table }) => {
   const context = useContext(AuthContext)
