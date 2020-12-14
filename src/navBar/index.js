@@ -17,7 +17,7 @@ const NavBar = () => {
         <div>
             <AppBar position="static">
                 <Toolbar>
-                    <NavLink href="#" className={styleClass.header} to="/">
+                    <NavLink href="#" className={styleClass.header} to="/home">
                         <Typography  theme={theme}>
                             <h1>tableFree</h1>
                         </Typography>

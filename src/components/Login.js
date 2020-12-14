@@ -4,13 +4,46 @@ import { Link, Route } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
 
-export const Login = (props) => {
+ export const LoggedInContext = React.createContext();
+
+const authenticatedState = {
+  isAuthenticated: false,
+  user: null,
+  token: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+        token: action.payload.token
+      };
+    case "LOGOUT":
+      localStorage.clear();
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null
+      };
+    default:
+      return state;
+  }
+};
+
+export const LoginContextProvider = (props) => {
   const { dispatch } = React.useContext(AuthContext);
+  const [state, loggedInDispatch] = React.useReducer(reducer, authenticatedState)
   const initialState = {
     email: "",
     password: "",
     isSubmitting: false,
-    errorMessage: null
+    errorMessage: null,
+
   };
   const [data, setData] = React.useState(initialState);
   const handleInputChange = event => {
@@ -45,7 +78,6 @@ export const Login = (props) => {
         throw res;
       })
       .then(resJson => {
-        console.log("token: " + token)
         dispatch({
           type: "LOGIN",
           payload: resJson
@@ -59,8 +91,14 @@ export const Login = (props) => {
         });
       });
   };
-  console.log("@login, token: " + token)
   return (
+    <LoggedInContext.Provider value={{
+    data,
+    dispatch
+    }}
+
+    >  {props.children}  </LoggedInContext.Provider>
+
     <div className="login-container">
       <div className="card">
         <div className="container">
@@ -102,6 +140,8 @@ export const Login = (props) => {
               </Link>
               <Route
                path={`/home/`} /> 
+              {props.children}
+
             </button>
           </form>
         </div>
@@ -109,4 +149,4 @@ export const Login = (props) => {
     </div>
   );
 };
-export default Login;
+export default LoginContextProvider;

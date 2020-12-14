@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect, Link , withRouter} from 'react-router-dom';
 import "./App.css";
-import Login from "./components/Login";
+import Login, { LoginContextProvider } from "./components/Login";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import NavBar from "./navBar/index"
@@ -21,7 +21,7 @@ export const AuthContext = React.createContext();
 const initialState = {
   isAuthenticated: false,
   user: null,
-  token: 1,
+  token: null,
 };
 
 const reducer = (state, action) => {
@@ -60,20 +60,22 @@ function Appify() {
           }}
         >
           <TabContextProvider>
-            
+            <LoginContextProvider>            
             {/* <Typography > */}
 
             <NavBar />
             <TableSelection />
-            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home' />}</div>
+            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home/' />}</div>
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
               <Route path="/bookingPage/" component={BookingPageView} />
               <Route exact path="/addTablePage/" component={AddTablePage} />
-              <Route exact path="/" component={Home} />
+              <Route exact path="/home/" component={Home} />
               {/* <Redirect from="*" to="/" /> */}
             </Switch>
             {/* </Typography> */}
+</LoginContextProvider>
+
           </TabContextProvider>
         </AuthContext.Provider>
       </BrowserRouter>
