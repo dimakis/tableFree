@@ -22,13 +22,6 @@ const NavBar = () => {
                             <h1>tableFree</h1>
                         </Typography>
                     </NavLink>
-                    <ul>
-                        <NavLink href="#" className={styleClass.header} to="/addTablePage" >
-                        <Typography theme={theme}>
-                            <h2>Add tables</h2>
-                        </Typography>
-                        </NavLink>
-                    </ul>
                 </Toolbar>
             </AppBar>
         </div>

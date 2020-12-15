@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Switch, Route, Redirect, Link , withRouter} from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom';
 import "./App.css";
-import Login, { LoginContextProvider } from "./components/Login";
+import Login from "./components/Login";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import NavBar from "./navBar/index"
@@ -14,6 +14,7 @@ import AddTablePage from "./views/addTableView";
 import ProtectedRoute from './components/ProtectedRoute'
 import TabContextProvider, { TablesDispatchContext } from "./context/tablesContext";
 import BookingPageView from './views/bookingPageView'
+// import {AuthContext} from './context/loggedInContext'
 
 
 export const AuthContext = React.createContext();
@@ -24,9 +25,19 @@ const initialState = {
   token: null,
 };
 
+// export const useAuthDispatchContext = () =>  {
+//   const disCon = React.useContext(AuthDispatchContext);
+//   if (disCon === undefined) {
+//     throw new Error('useCountDispatch must be used within a CountProvider')
+//   }
+//   return disCon
+// }
+
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
+      console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("token", JSON.stringify(action.payload.token));
       return {
@@ -48,33 +59,39 @@ const reducer = (state, action) => {
 };
 
 function Appify() {
-  const context = useContext(AuthContext)
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-  return (
+  // const context = useContext(AuthContext)
+  // const state = context.state
+  console.log('@ app')
+  const [state, dispatch] = React.useReducer(reducer, initialState)
+  console.log('@app, isAuthentiuaed?: ' + state.isAuthenticated)
+  console.log('@app, token: ' + localStorage.getItem('token'))
+
+    return (
     <React.Fragment>
       <BrowserRouter>
         <AuthContext.Provider
-          value={{
+          value={
             state,
             dispatch
-          }}
+          }
         >
           <TabContextProvider>
-            <LoginContextProvider>            
             {/* <Typography > */}
 
             <NavBar />
             <TableSelection />
-            <div className="App">{!state.isAuthenticated ? <Login /> : <Link to='/home/' />}</div>
+            <div className="App">{!state.isAuthenticated ? <Link to='login' /> : <Link to='/home/' />}</div>
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
-              <Route path="/bookingPage/" component={BookingPageView} />
+
+              <Route exact path="/bookingPage/" component={BookingPageView} />
               <Route exact path="/addTablePage/" component={AddTablePage} />
               <Route exact path="/home/" component={Home} />
-              {/* <Redirect from="*" to="/" /> */}
+              <Route exact path='/login/' component={Login} />
+
+              <Redirect from="*" to="/login/" />
             </Switch>
             {/* </Typography> */}
-</LoginContextProvider>
 
           </TabContextProvider>
         </AuthContext.Provider>
@@ -82,7 +99,7 @@ function Appify() {
     </React.Fragment>
   );
 }
-export default Appify
+export default  Appify
 
 
 //      <Route ="/" component={Home} />

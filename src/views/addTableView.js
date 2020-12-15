@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../App";
+import { useForm, FormProvider } from "react-hook-form";
+// import AuthContext  from "../context/loggedInContext";
 import { Card, CardContent } from "@material-ui/core";
 import NavBar from "../navBar";
 import TimeSlotDropdown from '../components/timeSlotDropdown'
@@ -7,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { TablesContext } from "../context/tablesContext";
+import FormInput from "../controls/textField";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,48 +21,83 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "BOOK_TABLES_REQUEST":
+            return {
+                state: { ...state },
+                isFetching: true,
+                hasError: false
+            };
+        case "BOOK_TABLES_SUCCESS":
+            return {
+                ...state,
+                isFetching: false,
+                tables: action.payload
+            };
+        case "BOOK_TABLES_FAILURE":
+            return {
+                ...state,
+                hasError: true,
+                isFetching: false
+            };
+        default:
+            return state;
+    }
+};
+const initialState = {
+    tableId: null,
+    timeSlots: [],
+    bookedBy: "",
+    isBooked: false
+}
+
+
 const AddTablePage = props => {
+    const useFormFoos = useForm();
+    const { handleSubmit } = useFormFoos
     const classes = useStyles();
     const authContext = useContext(AuthContext);
     const context = useContext(TablesContext)
 
-    const initialState = {
-        tableId: null,
-        timeSlots: [],
-        bookedBy: "",
-        isBooked: false
-    }
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case "BOOK_TABLES_REQUEST":
-                return {
-                    state: {...state},
-                    isFetching: true,
-                    hasError: false
-                };
-            case "BOOK_TABLES_SUCCESS":
-                return {
-                    ...state,
-                    isFetching: false,
-                    tables: action.payload
-                };
-            case "BOOK_TABLES_FAILURE":
-                return {
-                    ...state,
-                    hasError: true,
-                    isFetching: false
-                };
-            default:
-                return state;
-        }
-    };
 
-    const handleInputChange = event => {
+    const handleTextInputChange = event => {
         setData({
             ...data,
-            [event.target.name]: event.target.value
+            tableId: event.target.value,
         });
     };
+
+    const getArray = childArr =>    {
+
+        setData({
+            ...data,
+
+        })
+    }
+    
+    const handleDropdownInputChange = event => {
+
+        // const { options } = event.target;
+        // const value = [];
+        // for (let i = 0, l = options.length; i < l; i += 1) {
+        //   if (options[i].selected) {
+        //     value.push(options[i].value);
+        //     setData(data.timeSlots.push(options[i].value))
+        //   }
+        // }
+        // console.log('value[i]' +  )
+        // setTableId(value)
+        let ts = []
+        event.target.value = ts
+        console.log('@array, event.target.value: ' + ts)
+        setData({
+            ...data,
+            timeSlots: event.target.value,
+        });
+    };
+
 
     const { state: tablesState } = useContext(TablesContext);
     const [data, setData] = useState(initialState);
@@ -67,7 +105,7 @@ const AddTablePage = props => {
     // let tableID = props.id;
     // let tableTime = props.timeSlots.time
 
-    // console.log('@atblepage, tablesState: ')
+    console.log('@atblepage, tablesState: ')
     const handleFormSubmit = event => {
         setData({
             ...data,
@@ -78,12 +116,7 @@ const AddTablePage = props => {
         dispatch({
             type: "ADD_TABLE_REQUEST"
         });
-        console.log("token: " + authContext.state.token)
-
-        console.log("@addTablesView, dispatch before fetch: "+ data.tableId)
-
-
-                fetch(`http://localhost:3030/tables/${data.tableId}`, {
+        fetch(`http://localhost:3030/tables/${data.tableId}`, {
             method: "POST",
             headers: {
                 'Autherization': `Bearer ${authContext.state.token}`
@@ -93,7 +126,6 @@ const AddTablePage = props => {
                 timeSlots: data.timeSlots,
             })
         })
-
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -116,32 +148,35 @@ const AddTablePage = props => {
             });
     }
 
- 
+console.log('@add table view, just before return authcontext.state.token: ' + authContext.state.token)
     return (
         // <NavBar />
         <Container >
-            
+
             {/* <form className={classes.root} noValidate autoComplete="off"> */}
-                <div>
-                    <form onSubmit={handleFormSubmit}>
-                        <h2>Table ID:</h2>
-                        <TextField onChange={handleInputChange} required id="standard-required" label="Required" />
-                        <h2>Table Time Slots</h2>
-                        <TimeSlotDropdown onChange={handleInputChange} />
+            <div>
+                {/* <FormProvider { ...useFormFoos} > */}
+                <form className={classes.root} onSubmit={handleFormSubmit}> 
+                    <h2>Table ID:</h2>
+                    {/* <FormInput onSubmit={handleFormSubmit} name ="name" label="name" /> */}
+                    <TextField onChange={handleTextInputChange} id="tableIdInput" label="Required" value={data.tableID} />
+                    <h2>Table Time Slots</h2>
+                    <TimeSlotDropdown multiple={true} onChange={handleDropdownInputChange} id="timeSlotDropdown" value={data.timeSlots} />
 
 
-                        {data.errorMessage && (
-                            <span className="form-error">{data.errorMessage}</span>
-                        )}
-                        <button disabled={data.isSubmitting}>
-                            {data.isSubmitting ? (
-                                "Loading..."
-                            ) : (
-                                    "Submit"
-                                )}
-                        </button>
-                    </form>
-                </div>
+                    {data.errorMessage && (
+                        <span className="form-error">{data.errorMessage}</span>
+                    )}
+                    <button disabled={data.isSubmitting}>
+                        {data.isSubmitting ? (
+                            "Loading..."
+                        ) : (
+                                "Submit"
+                            )}
+                    </button>
+                </form>
+                {/* </FormProvider> */}
+            </div>
             {/* </form> */}
         </Container>
     );

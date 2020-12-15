@@ -1,10 +1,12 @@
 import React from "react";
 import { AuthContext } from "../App";
+
+// import AuthContext from "../context/loggedInContext";
 import { Link, Route } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
 
- export const LoggedInContext = React.createContext();
+//  export const LoggedInContext = React.createContext();
 
 const authenticatedState = {
   isAuthenticated: false,
@@ -12,32 +14,34 @@ const authenticatedState = {
   token: null,
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "LOGIN":
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
-      localStorage.setItem("token", JSON.stringify(action.payload.token));
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload.user,
-        token: action.payload.token
-      };
-    case "LOGOUT":
-      localStorage.clear();
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null
-      };
-    default:
-      return state;
-  }
-};
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case "LOGIN":
+//       localStorage.setItem("user", JSON.stringify(action.payload.user));
+//       localStorage.setItem("token", JSON.stringify(action.payload.token));
+//       return {
+//         ...state,
+//         isAuthenticated: true,
+//         user: action.payload.user,
+//         token: action.payload.token
+//       };
+//     case "LOGOUT":
+//       localStorage.clear();
+//       return {
+//         ...state,
+//         isAuthenticated: false,
+//         user: null
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
-export const LoginContextProvider = (props) => {
-  const { dispatch } = React.useContext(AuthContext);
-  const [state, loggedInDispatch] = React.useReducer(reducer, authenticatedState)
+export const LoginContextProvider = () => {
+  const {  state, dispatch } = React.useContext(AuthContext);
+  // const { state, dispatch }  = React.useContext(AuthContext);
+  // const dispatch = useAuthDispatchContext()
+  // const [state, loggedInDispatch] = React.useReducer(reducer, authenticatedState)
   const initialState = {
     email: "",
     password: "",
@@ -46,22 +50,25 @@ export const LoginContextProvider = (props) => {
 
   };
   const [data, setData] = React.useState(initialState);
+
   const handleInputChange = event => {
     setData({
       ...data,
       [event.target.name]: event.target.value
     });
   };
-  const handleFormSubmit = event => {
+
+  const handleFormSubmit = ( event ) => {
+    console.log('@login, handleformsubmit start')
     event.preventDefault();
     setData({
-      ...data,
+      data: {...data},
       isSubmitting: true,
       errorMessage: null
     });
     let id = data.email
     const token = Buffer.from(`${data.email}:${data.password}`, 'utf8').toString('base64')
-    fetch("http://localhost:3035/users/", {
+     fetch("http://localhost:3035/users/", {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`
@@ -71,7 +78,7 @@ export const LoginContextProvider = (props) => {
         password: data.password
       })
     })
-      .then(res => {
+      .then( res => {
         if (res.ok) {
           return res.json();
         }
@@ -90,15 +97,10 @@ export const LoginContextProvider = (props) => {
           errorMessage: error.message || error.statusText
         });
       });
+      // console.log('@login, isAuthenticated: ' + state.isAuthenticated)
+
   };
   return (
-    <LoggedInContext.Provider value={{
-    data,
-    dispatch
-    }}
-
-    >  {props.children}  </LoggedInContext.Provider>
-
     <div className="login-container">
       <div className="card">
         <div className="container">
@@ -138,9 +140,9 @@ export const LoginContextProvider = (props) => {
                     "Login"
                   )}
               </Link>
-              <Route
-               path={`/home/`} /> 
-              {props.children}
+              {/* <Route
+               path={`/home/`} component={Home}/>  */}
+              {/* {props.children} */}
 
             </button>
           </form>

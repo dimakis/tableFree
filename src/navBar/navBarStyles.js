@@ -11,6 +11,7 @@ export default makeStyles({
     
           fontSize: '3rem',
           fontWeight: '300',
+          textDecoration: 'none',
           '& span': {
             fontWeight: '700'
           }, [sizes.down('xs')]: {

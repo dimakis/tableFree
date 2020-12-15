@@ -10,6 +10,8 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 
+const returnArrayState = React.createContext()
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -75,6 +77,7 @@ export default function MultipleSelect() {
     for (let i = 0, l = options.length; i < l; i += 1) {
       if (options[i].selected) {
         value.push(options[i].value);
+        console.log('@timeSlotDrop, handle change multi: ' + options[i].value)
       }
     }
     setTableId(value);
@@ -122,6 +125,9 @@ export default function MultipleSelect() {
           ))}
         </Select>
       </FormControl>
+      <>
+      
+      </>
     </div>
   );
 }

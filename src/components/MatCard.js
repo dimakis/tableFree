@@ -7,7 +7,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { AuthContext } from "../App";
+// import { AuthContext } from "../App";
+import AuthContext from "../context/loggedInContext";
 import { Box } from '@material-ui/core';
 import BookingPageTemplate from '../bookingPageTemplate/index'
 import useToggleState from '../hooks/useToggleState';

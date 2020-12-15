@@ -12,13 +12,6 @@ export const WhiteTextTypography = withStyles({
   }
 })(Typography);
 
-const NavTheme = createMuiTheme({
-    typography: {
-      allVariants: {
-        color: "white"
-      },
-    },
-  });
 
  export const theme = createMuiTheme({
     palette: {
@@ -27,7 +20,6 @@ const NavTheme = createMuiTheme({
             main: '#673ab7',
             dark: '#002884',
             contrastText: '#fff',
-            text:WhiteNavFont
           },
           secondary: {
             light: '#ff7961',

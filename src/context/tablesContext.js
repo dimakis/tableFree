@@ -9,9 +9,9 @@ export const TablesContext = React.createContext();
 export const TablesDispatchContext = React.createContext();
 
 const initialState = {
-    isAuthenticated: false,
-    user: null,
-    token: null,
+    // isAuthenticated: false,
+    // user: null,
+    // token: null,
     tables: [],
     isFetching: false,
     hasError: false,
@@ -23,7 +23,8 @@ const reducer = (state, action) => {
     switch (action.type) {
         case "FETCH_TABLES_REQUEST":
             return {
-                token: localStorage.getItem("token"),
+                // token: localStorage.getItem("token"),
+                // isAuthenticated: 
                 ...state,
                 isFetching: true,
                 hasError: false
@@ -107,9 +108,9 @@ export const TabContextProvider = (props) => {
             <TablesContext.Provider
                 value={{
                     tables: state.tables,
-                    isAuthenticated: state.isAuthenticated,
-                    user: state.user,
-                    token: state.token,
+                    // isAuthenticated: state.isAuthenticated,
+                    // user: state.user,
+                    // token: state.token,
                     isFetching: state.isFetching,
                     hasError: state.hasError,
                     isBooking: state.isBooking,
