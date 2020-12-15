@@ -38,6 +38,7 @@ function createToken(payload){
       return
     }
     const access_token = createToken({email, password})
+    // console.log('@server, token: ' + json({access_token}))
     res.status(200).json({access_token})
   })
   

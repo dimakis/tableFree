@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { TablesContext } from "../context/tablesContext";
 import FormInput from "../controls/textField";
+import { Multiselect } from 'multiselect-react-dropdown';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -78,6 +79,7 @@ const AddTablePage = props => {
     }
     
     const handleDropdownInputChange = event => {
+        console.log('@handleDropdown, event.target.value: ' + event.target.value)
 
         // const { options } = event.target;
         // const value = [];
@@ -148,7 +150,7 @@ const AddTablePage = props => {
             });
     }
 
-console.log('@add table view, just before return authcontext.state.token: ' + authContext.state.token)
+// console.log('@add table view, just before return authcontext.state.token: ' + authContext.state.token)
     return (
         // <NavBar />
         <Container >
@@ -161,7 +163,7 @@ console.log('@add table view, just before return authcontext.state.token: ' + au
                     {/* <FormInput onSubmit={handleFormSubmit} name ="name" label="name" /> */}
                     <TextField onChange={handleTextInputChange} id="tableIdInput" label="Required" value={data.tableID} />
                     <h2>Table Time Slots</h2>
-                    <TimeSlotDropdown multiple={true} onChange={handleDropdownInputChange} id="timeSlotDropdown" value={data.timeSlots} />
+                    <TimeSlotDropdown multiple={true} onItemChange={handleDropdownInputChange} id="timeSlotDropdown" value={data.timeSlots} />
 
 
                     {data.errorMessage && (

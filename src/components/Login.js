@@ -59,7 +59,7 @@ export const LoginContextProvider = () => {
   };
 
   const handleFormSubmit = ( event ) => {
-    console.log('@login, handleformsubmit start')
+    // console.log('@login, handleformsubmit start')
     event.preventDefault();
     setData({
       data: {...data},
@@ -84,6 +84,7 @@ export const LoginContextProvider = () => {
         }
         throw res;
       })
+      // console.log('@login, res.jason: ' + resJson)
       .then(resJson => {
         dispatch({
           type: "LOGIN",
@@ -140,8 +141,8 @@ export const LoginContextProvider = () => {
                     "Login"
                   )}
               </Link>
-              {/* <Route
-               path={`/home/`} component={Home}/>  */}
+              <Route
+               path={`/home/`} component={Home}/> 
               {/* {props.children} */}
 
             </button>

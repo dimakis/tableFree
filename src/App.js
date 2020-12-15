@@ -37,7 +37,7 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
+      // console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
       localStorage.setItem("user", JSON.stringify(action.payload.user));
       localStorage.setItem("token", JSON.stringify(action.payload.token));
       return {
@@ -70,10 +70,10 @@ function Appify() {
     <React.Fragment>
       <BrowserRouter>
         <AuthContext.Provider
-          value={
+          value={{
             state,
             dispatch
-          }
+          }}
         >
           <TabContextProvider>
             {/* <Typography > */}
@@ -84,9 +84,9 @@ function Appify() {
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 
-              <Route exact path="/bookingPage/" component={BookingPageView} />
-              <Route exact path="/addTablePage/" component={AddTablePage} />
-              <Route exact path="/home/" component={Home} />
+              <ProtectedRoute exact path="/bookingPage/" component={BookingPageView} />
+              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
+              <ProtectedRoute exact path="/home/" component={Home} />
               <Route exact path='/login/' component={Login} />
 
               <Redirect from="*" to="/login/" />

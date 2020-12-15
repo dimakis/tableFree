@@ -3,10 +3,12 @@ import Home from '../components/Home'
 import Login from '../components/Login'
 import ProtectedRoute from "../components/ProtectedRoute";
 import { Route } from 'react-router-dom'
+import { AuthContext } from '../App'
 
 
 export const TablesContext = React.createContext();
 export const TablesDispatchContext = React.createContext();
+
 
 const initialState = {
     // isAuthenticated: false,
@@ -22,8 +24,10 @@ const initialState = {
 const reducer = (state, action) => {
     switch (action.type) {
         case "FETCH_TABLES_REQUEST":
+            // console.log('@tablesContext, token: ' + state.token)
+
             return {
-                // token: localStorage.getItem("token"),
+                token: state.token,
                 // isAuthenticated: 
                 ...state,
                 isFetching: true,
@@ -54,6 +58,8 @@ const reducer = (state, action) => {
 };
 
 export const TabContextProvider = (props) => {
+    const { state: authState } = React.useContext(AuthContext)
+    console.log('@tablesContext, authstate.token: ' + authState.token)
     const [state, dispatch] = React.useReducer(reducer, initialState)
 
 
@@ -67,7 +73,6 @@ export const TabContextProvider = (props) => {
     };
 
     React.useEffect(() => {
-
         dispatch({
             type: "FETCH_TABLES_REQUEST"
         });
@@ -99,7 +104,7 @@ export const TabContextProvider = (props) => {
                     type: "FETCH_TABLES_FAILURE"
                 });
             });
-    }, []);
+    }, [state.token]);
 
 
 
