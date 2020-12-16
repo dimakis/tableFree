@@ -72,41 +72,38 @@ export const TabContextProvider = (props) => {
         // console.log("tablesContext.js addBookingToTable foo " + payload)
     };
     // const FetchTables = () => {
-        React.useEffect(() => {
-            dispatch({
-                type: "FETCH_TABLES_REQUEST"
-            });
-            fetch("http://localhost:3035/tables/", {
-                // the reason I can do leave out the localhost is I designated port 3030 as a proxy
-                // fetch("/tables/", {
-                headers: {
-                    Authorization: `Bearer ${state.token}`
-                }
-            })
-                .then(res => {
-                    if (res.ok) {
-                        return res.json();
-                    } else {
-                        throw res;
-                    }
-                })
-                .then(resJson => {
-                    console.log(resJson);
-                    console.log("fetch table success")
-                    dispatch({
-                        type: "FETCH_TABLES_SUCCESS",
-                        payload: resJson
-                    })
-                })
-                .catch(error => {
-                    console.log(error);
-                    dispatch({
-                        type: "FETCH_TABLES_FAILURE"
-                    });
-                });
-        }, []);
+    React.useEffect(() => {
+        dispatch({
+            type: "FETCH_TABLES_REQUEST"
+        });
+        fetch("http://localhost:3035/tables/", {
+            // the reason I can do leave out the localhost is I designated port 3030 as a proxy
+            // fetch("/tables/", {
+            headers: {
+                Authorization: `Bearer ${state.token}`
+            }
+        })
+            .then(res => {
+                return res = res.json();
 
-    
+            })
+            .then(resJson => {
+                console.log(resJson);
+                console.log("fetch table success")
+                dispatch({
+                    type: "FETCH_TABLES_SUCCESS",
+                    payload: resJson
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch({
+                    type: "FETCH_TABLES_FAILURE"
+                });
+            });
+    }, []);
+
+
 
     return (
         <React.Fragment>

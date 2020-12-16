@@ -38,12 +38,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
-      localStorage.setItem("user", JSON.stringify(action.payload.token));
+      // localStorage.setItem("user", JSON.stringify(action.payload.token));
       localStorage.setItem("token", JSON.stringify(action.payload.access_token));
       return {
         isAuthenticated: true,
         ...state,
-        // user: action.payload.user,
+        token: localStorage.getItem("token"),
       };
     case "LOGOUT":
       localStorage.clear();
@@ -79,7 +79,7 @@ function Appify() {
 
             <NavBar />
             <TableSelection />
-            <div className="App">{!state.isAuthenticated ? <Link to='login' /> : <Link to='/home/' />}</div>
+            {/* <div className="App">{!state.isAuthenticated ? <Link to='login' /> : <Link to='/home/' />}</div> */}
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 

@@ -129,10 +129,7 @@ const AddTablePage = props => {
             })
         })
             .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw res;
+                    return res=  res.json();
             })
             .then(resJson => {
                 dispatch({
