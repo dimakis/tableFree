@@ -37,14 +37,14 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      // console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
-      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
+      localStorage.setItem("user", JSON.stringify(action.payload.token));
+      localStorage.setItem("token", JSON.stringify(action.payload.access_token));
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload.user,
-        token: action.payload.token
+        token: action.payload.access_token
       };
     case "LOGOUT":
       localStorage.clear();
@@ -84,9 +84,9 @@ function Appify() {
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 
-              <ProtectedRoute exact path="/bookingPage/" component={BookingPageView} />
-              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
-              <ProtectedRoute exact path="/home/" component={Home} />
+              <Route exact path="/bookingPage/" component={BookingPageView} />
+              <Route exact path="/addTablePage/" component={AddTablePage} />
+              <Route exact path="/home/" component={Home} />
               <Route exact path='/login/' component={Login} />
 
               <Redirect from="*" to="/login/" />

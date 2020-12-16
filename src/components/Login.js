@@ -38,7 +38,7 @@ const authenticatedState = {
 // };
 
 export const LoginContextProvider = () => {
-  const {  state, dispatch } = React.useContext(AuthContext);
+  const { state, dispatch } = React.useContext(AuthContext);
   // const { state, dispatch }  = React.useContext(AuthContext);
   // const dispatch = useAuthDispatchContext()
   // const [state, loggedInDispatch] = React.useReducer(reducer, authenticatedState)
@@ -58,38 +58,41 @@ export const LoginContextProvider = () => {
     });
   };
 
-  const handleFormSubmit = ( event ) => {
+  const handleFormSubmit = async (event) => {
     // console.log('@login, handleformsubmit start')
     event.preventDefault();
     setData({
-      data: {...data},
+      data: { ...data },
       isSubmitting: true,
       errorMessage: null
     });
     let id = data.email
     const token = Buffer.from(`${data.email}:${data.password}`, 'utf8').toString('base64')
-     fetch("http://localhost:3035/users/", {
+    let res = await fetch("http://localhost:3035/auth/login", {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
-        username: data.email,
-        password: data.password
+        "email": data.email,
+        "password": data.password
       })
     })
-      .then( res => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw res;
+      // .then( res => {
+      //   if (res.ok) {
+      //     return res.json();
+      //   }
+      //   throw res;
+      // })
+      .then(res => {
+          return res =res.json();
       })
-      // console.log('@login, res.jason: ' + resJson)
-      .then(resJson => {
+      // console.log('@login, res.json: ' + res)
+      .then(res => {
         dispatch({
           type: "LOGIN",
-          payload: resJson
-        })
+          payload: res  
+              })
       })
       .catch(error => {
         setData({
@@ -98,7 +101,7 @@ export const LoginContextProvider = () => {
           errorMessage: error.message || error.statusText
         });
       });
-      // console.log('@login, isAuthenticated: ' + state.isAuthenticated)
+    // console.log('@login, res.statustext: ' + res.statusText)
 
   };
   return (
@@ -142,7 +145,7 @@ export const LoginContextProvider = () => {
                   )}
               </Link>
               <Route
-               path={`/home/`} component={Home}/> 
+                path={`/home/`} component={Home} />
               {/* {props.children} */}
 
             </button>

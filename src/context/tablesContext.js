@@ -50,7 +50,7 @@ const reducer = (state, action) => {
                 ...state,
                 isBooking: true,
                 tableForBooking: action.payload,
-                
+
             };
         default:
             return state;
@@ -71,42 +71,42 @@ export const TabContextProvider = (props) => {
         dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
         // console.log("tablesContext.js addBookingToTable foo " + payload)
     };
-
-    React.useEffect(() => {
-        dispatch({
-            type: "FETCH_TABLES_REQUEST"
-        });
-        fetch("http://localhost:3030/tables/", {
-            // the reason I can do leave out the localhost is I designated port 3030 as a proxy
-            // fetch("/tables/", {
-            headers: {
-                Authorization: `Bearer ${state.token}`
-            }
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw res;
+    // const FetchTables = () => {
+        React.useEffect(() => {
+            dispatch({
+                type: "FETCH_TABLES_REQUEST"
+            });
+            fetch("http://localhost:3035/tables/", {
+                // the reason I can do leave out the localhost is I designated port 3030 as a proxy
+                // fetch("/tables/", {
+                headers: {
+                    Authorization: `Bearer ${state.token}`
                 }
             })
-            .then(resJson => {
-                console.log(resJson);
-                console.log("fetch table success")
-                dispatch({
-                    type: "FETCH_TABLES_SUCCESS",
-                    payload: resJson
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw res;
+                    }
                 })
-            })
-            .catch(error => {
-                console.log(error);
-                dispatch({
-                    type: "FETCH_TABLES_FAILURE"
+                .then(resJson => {
+                    console.log(resJson);
+                    console.log("fetch table success")
+                    dispatch({
+                        type: "FETCH_TABLES_SUCCESS",
+                        payload: resJson
+                    })
+                })
+                .catch(error => {
+                    console.log(error);
+                    dispatch({
+                        type: "FETCH_TABLES_FAILURE"
+                    });
                 });
-            });
-    }, [state.token]);
+        }, []);
 
-
+    
 
     return (
         <React.Fragment>
@@ -127,8 +127,8 @@ export const TabContextProvider = (props) => {
             >
                 <TablesDispatchContext.Provider
                     value={dispatch}
-                >                    
-                {props.children}
+                >
+                    {props.children}
                 </TablesDispatchContext.Provider>
             </TablesContext.Provider>
         </React.Fragment>

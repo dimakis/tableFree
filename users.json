@@ -6,7 +6,7 @@
       "email": "johndoe@abc.com",
       "username": "john_doe@gmail.com",
       "status": "Terminated",
-      "password": "123456789",
+      "password": 123456789,
       "isAdmin": true
     },
     {

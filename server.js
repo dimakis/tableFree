@@ -30,8 +30,12 @@ function createToken(payload){
   }
   
   server.post('/auth/login', (req, res) => {
-    const {email, password} = req.body
-    if (isAuthenticated({email, password}) === false) {
+    // let obj = JSON.parse({req})
+    // console.log('@server, post body.email: ' + {obj})
+
+    const { email, password } = req
+    console.log('@server, post body.email: ' + {email})
+    if (isAuthenticated({email, password}) === -1) {
       const status = 401
       const message = 'Incorrect email or password'
       res.status(status).json({status, message})
