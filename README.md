@@ -22,6 +22,7 @@ https://www.techiediaries.com/fake-api-jwt-json-server/
 # inspiration and starting point
 https://www.freecodecamp.org/news/build-a-react-hooks-front-end-app-with-routing-and-authentication/
 https://www.freecodecamp.org/news/state-management-with-react-hooks/
+https://medium.com/javascript-in-plain-english/authentication-in-react-caf2abfa0494
 
 # Getting Started with Create React App
 

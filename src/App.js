@@ -41,10 +41,9 @@ const reducer = (state, action) => {
       localStorage.setItem("user", JSON.stringify(action.payload.token));
       localStorage.setItem("token", JSON.stringify(action.payload.access_token));
       return {
-        ...state,
         isAuthenticated: true,
-        user: action.payload.user,
-        token: action.payload.access_token
+        ...state,
+        // user: action.payload.user,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -63,15 +62,15 @@ function Appify() {
   // const state = context.state
   console.log('@ app')
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  console.log('@app, isAuthentiuaed?: ' + state.isAuthenticated)
   console.log('@app, token: ' + localStorage.getItem('token'))
 
-    return (
+  return (
     <React.Fragment>
       <BrowserRouter>
         <AuthContext.Provider
           value={{
             state,
+            isAuthenticated: state.isAuthenticated,
             dispatch
           }}
         >
@@ -84,9 +83,9 @@ function Appify() {
             <Switch>
               {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 
-              <Route exact path="/bookingPage/" component={BookingPageView} />
-              <Route exact path="/addTablePage/" component={AddTablePage} />
-              <Route exact path="/home/" component={Home} />
+              <ProtectedRoute exact path="/bookingPage/" component={BookingPageView} />
+              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
+              <ProtectedRoute exact path="/home/" component={Home} />
               <Route exact path='/login/' component={Login} />
 
               <Redirect from="*" to="/login/" />
@@ -99,7 +98,7 @@ function Appify() {
     </React.Fragment>
   );
 }
-export default  Appify
+export default Appify
 
 
 //      <Route ="/" component={Home} />

@@ -68,7 +68,7 @@ export const LoginContextProvider = () => {
     });
     let id = data.email
     const token = Buffer.from(`${data.email}:${data.password}`, 'utf8').toString('base64')
-    let res = await fetch("http://localhost:3035/auth/login", {
+    await fetch("http://localhost:3035/auth/login", {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`

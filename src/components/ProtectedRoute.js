@@ -7,10 +7,11 @@ const ProtectedRoute = props => {
     // render() {
     const component = props.component;
     const context = React.useContext(AuthContext)
-    const isAuthenticated = context.isAuthenticated
+    // const isAuthenticated = context.state.isAuthenticate
+    const isAuthenticated = localStorage.getItem('token')
     let path = props.path
-    console.log('@protectedPath, component: ' + component)
-    console.log('@protectedRoute, isAuthenticted: ' + context.state.isAuthenticated)
+    // console.log('@protectedPath, component: ' + component)
+    console.log('@protectedRoute, isAuthenticted: ' + isAuthenticated)
     let authToken = localStorage.getItem('token');
     console.log('@protectedPath, authToken: ' + authToken)
     console.log('@protectedPath, path: ' + path)
