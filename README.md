@@ -1,3 +1,104 @@
+![][homePage]
+
+# Assignment 1 - ReactJS app.
+
+Name: Dimtiri Saridakis
+
+## Features.
+
+ I didn't do the Movies Fan App as given to us to improve on. Instead, I implemented my own Table Booking App to be used by staff to keep track of table bookings and times.
+
+ + The app has full authentication provided by a custom server script running a json-server to provide access to the users.json db. 
+ + Authentication is provided by way of user's email address and password with is sent to the authentication server to validate. Upon validation a JWT is created and sent back,
+ + A second json-server is deployed for the tables database, keeping the users details seperate from data.
+ + The routes to all views are safeguarded by a custom ProtectedRoutes component. Access to all views with the exception of the Login page require the user to be autherised.
+ + The JWT access token expires after one hour, thereby needing a sign in again after the hour.
+ + Upon successful login, you are directed to the home/ tableview page. A list of all tables with booking information is displayed as a dynamic array of cards that is fetched from the database.
++ The options header has three options, An add table to database view, a book table view and a log out button.
++ The add tables view has a Material UI input form with an option for Table ID and a multi select dropdown that offers a list of time slots for which this table is available for booking. 
++ Upon selection of all relevant time slots and submittal a POST request is made to the server and the table is added.
++ Moving back to the home page the table cards are rerendered with the new addition.
++ The table booking page brings you to a form using a useForm hook with some validation and some error messages with another dropdown to select the table and the Time slot from that table. This page is not functional as of yet.
++ The log out button, removes the token from local storage and sends the user back to the login page.
++ The majority of the App is styled using Material use and JSS making use of makeStyle and useStyle.
+
+## Setup requirements.
+
+To run you can 
+> npm install 
+Then run
+> npm run dev
+This command will run all start up scripts concurrently.
+
+Once the app is running using 
+Email address:
+> johndoe@abc.com
+With password 
+> 123456789
+
+Will allow for login.
+## API Data Model.
+
++ http://localhost:3035/auth/login - this is the login endpoint to POST requests for autherisation tokens. 
++ http://localhost:3030/tables/ - this is the link to POST the tables to the database, it also GETs the tables in the db
++ http://localhost:3030/tables/${id} -  the link to GET the tables by ID
+
+
+## App Design.
+ The app has full authentication provided by a custom server script running a json-server to provide access to the users.json db. 
+ Authentication is provided by way of user's email address and password with is sent to the authentication server to validate. 
+ Upon validation a JWT is created and sent back the user is then autherised to view the rest of the app
+ A second json-server is deployed for the tables database, keeping the users details seperate from data.
+ The routes to all views are safeguarded by a custom ProtectedRoutes component. Access to all views with the exception of the Login page require the user to be autherised.
+ The JWT access token expires after one hour, thereby needing a sign in again after the hour.
+
+ Upon successful login, you are directed to the home/ tableview page. A list of all tables with booking information is displayed as a dynamic array of cards that is fetched from the database.
+The options header has three options, An add table to database view, a book table view and a log out button.
+
+The add tables view has a Material UI input form with an option for Table ID and a multi select dropdown that offers a list of time slots for which this table is available for booking. 
+Upon selection of all relevant time slots and submittal a POST request is made to the server and the table is added.
+Moving back to the home page the table cards are rerendered with the new addition.
+
+The table booking page brings you to a form using a useForm hook with some validation and some error messages with another dropdown to select the table and the Time slot from that table. This page is not functional as of yet.
+
+The log out button, removes the token from local storage and sends the user back to the login page.
+The majority of the App is styled using Material use and JSS making use of makeStyle and useStyle.
+
+
+### UI Design.
+
+...... Insert screenshots of the new/modified views you have added to the Movies Fan app. Include a caption for each one clearly stating its purpose and any user interaction it supports ........
+![][bookTablePage]
+> This is the book tables page.
+
+![][addTablePage]
+> This is the add tables page.
+
+![][loginPage]
+> This is the login page. 
+
+## Routing.
+
++ /login/ 
+No authentication
++ /home/
+Requires Authentication
++ /bookingPage/
+Requires Authentication
++ /addTablePage/
+Requires Authentication
+
+
+## Independent learning (If relevant).
+
++ I used Material UI for design
++ Json-server for server functionality
++ Custom protected routes
++ Authentication with JWT tokens
++ useForm hook
++ POST operations and fetch headers
+
+
 # for form submit and navigation using history
 https://stackoverflow.com/questions/54579730/react-hooks-with-react-router-v4-how-do-i-redirect-to-another-route
 
@@ -27,74 +128,11 @@ https://www.techiediaries.com/fake-api-jwt-json-server/
 https://www.freecodecamp.org/news/build-a-react-hooks-front-end-app-with-routing-and-authentication/
 https://www.freecodecamp.org/news/state-management-with-react-hooks/
 https://medium.com/javascript-in-plain-english/authentication-in-react-caf2abfa0494
+---------------------------------
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[model]: ./data.jpg
+[movieDetail]: ./public/movieDetail.png
+[review]: ./public/review.png
+[reviewLink]: ./public/reviewLink.png
+[cardLink]: ./public/cardLink.png
+[stories]: ./public/storybook.png

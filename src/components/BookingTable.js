@@ -75,16 +75,6 @@ export default function BookTable() {
                             <input name="lastName" ref={register({ required: true, minLength: 2 })} />
                             <ErrorMessage error={errors.firstName} />
                         </Grid>
-                        <Grid item xs={6}>
-                            <label>Gender</label>
-                            <select name="gender" ref={register({ required: true })}>
-                                <option value="">Select...</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-
-                            <ErrorMessage error={errors.gender} />
-                        </Grid>
                         <Grid item xs={6} >
                             <label>Username</label>
                             <input

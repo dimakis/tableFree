@@ -38,15 +38,31 @@ console.log('@tablebookingPage, tablesContext.state.tables' + state.tables )
             timeSlots: values,
         });
     };
-
-
+    const handleDropdownInputChangeTimeSlots = selectedOptions => {
+        let values = state.tables.timeSlots
+        selectedOptions.forEach(selectedOption => {
+            if (selectedOption !== null) {
+                console.log(`Selected: ${selectedOption.label}`)
+                values.push(selectedOption.label)
+            }
+        },
+            values.filter(v =>
+                (typeof v === 'string') && !!v
+            )
+        )
+        setData({
+            ...data,
+            timeSlots: values,
+        });
+    };
+    
     return (
         <>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
                 <Grid item xs={6}>
                     <BookingTable />
                 </Grid>
-                <Grid item xs={6} >
+                <Grid item xs={3} >
                     <h1>Select Table</h1>
                     <Select
                         value={tablesContext.state.tables}
@@ -57,6 +73,19 @@ console.log('@tablebookingPage, tablesContext.state.tables' + state.tables )
                         options={tablesContext.state.tables}
                         classNamePrefix='select'
                         onChange={handleDropdownInputChange}
+                    ></Select>
+                </Grid>
+                <Grid item xs={3} >
+                    <h1>Select Time Slot</h1>
+                    <Select
+                        value={tablesContext.state.tableForBooking.timeSlots}
+                        // default={times[0]}
+                        isMulti
+                        components={animatedComponents}
+                        name='timeSlotsDropdown'
+                        options={tablesContext.state.tableForBooking.timeSlots}
+                        classNamePrefix='select'
+                        onChange={handleDropdownInputChangeTimeSlots}
                     ></Select>
                 </Grid>
             </Grid>
