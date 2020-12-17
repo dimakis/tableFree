@@ -59,6 +59,7 @@ export const Home = () => {
   const authContext = useContext(AuthContext)
   const tablesContext = useContext(TablesContext)
   const isBooking = tablesContext.isBooking;
+  tablesContext.fetchTables()
   // console.log('context: ' + context)
 
   // const { state: authState } = React.useContext(AuthContext);

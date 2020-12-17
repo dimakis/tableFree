@@ -71,12 +71,13 @@ export const TabContextProvider = (props) => {
         dispatch({ type: "BOOK_TABLE", payload: { table: state.tables[index] } });
         // console.log("tablesContext.js addBookingToTable foo " + payload)
     };
-    // const FetchTables = () => {
+    
+    const FetchTables = () => {
     React.useEffect(() => {
         dispatch({
             type: "FETCH_TABLES_REQUEST"
         });
-        fetch("http://localhost:3035/tables/", {
+        fetch("http://localhost:3030/tables/", {
             // the reason I can do leave out the localhost is I designated port 3030 as a proxy
             // fetch("/tables/", {
             headers: {
@@ -102,7 +103,7 @@ export const TabContextProvider = (props) => {
                 });
             });
     }, []);
-
+    }
 
 
     return (
@@ -119,6 +120,7 @@ export const TabContextProvider = (props) => {
                     tableForBooking: state.tableForBooking,
                     state: { ...state },
                     addBookingToTable: addBookingToTable,
+                    fetchTables:FetchTables,
                     dispatch: dispatch,
                 }}
             >

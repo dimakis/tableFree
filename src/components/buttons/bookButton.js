@@ -29,6 +29,7 @@ const BookButton = ({ table }) => {
 
     const classes = useStyles()
     const tabId = table.id
+    let tableName = table.tableName
     const state = context.state
     const [isBooking, toggle] = useToggleState(false)
 
@@ -56,7 +57,7 @@ const BookButton = ({ table }) => {
                     state: { ...state },
                 }}>
                     <Button onClick={handleAddToBooking} table={table} size={"large"} color="primary"  >
-                        <h2>Table {tabId}-></h2>
+                        <h2>Table {parseInt(table.tableName)}-></h2>
                         <BookTwoToneIcon className={classes.root} />
                     </Button>
                     {state.isBooking ? <Redirect to={{

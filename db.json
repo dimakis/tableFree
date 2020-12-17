@@ -22,6 +22,7 @@
   },
   "tables": [
     {
+      "tableName": 100,
       "id": 100,
       "timeSlots": [
         {
@@ -37,6 +38,7 @@
       ]
     },
     {
+      "tableName": 101,
       "id": 101,
       "timeSlots": [
         {
@@ -52,6 +54,7 @@
       ]
     },
     {
+      "tableName": 102,
       "id": 102,
       "timeSlots": [
         {
@@ -67,59 +70,62 @@
       ]
     },
     {
-      "id": 1,
+      "tableName": 109,
+      "id": "109",
       "timeSlots": [
         {
-          "12 to 1": true
+          "time": "1-2",
+          "bookedBy": "",
+          "isBooked": false
         },
         {
-          "1 to 2": false
+          "time": "4-5",
+          "bookedBy": "",
+          "isBooked": false
         }
       ]
     },
     {
-      "id": 3,
+      "tableName": 110,
       "timeSlots": [
         {
-          "12 to 1": true
+          "time": "1-2",
+          "bookedBy": "",
+          "isBooked": false
         },
         {
-          "1 to 2": false
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "timeSlots": [
-        {
-          "12 to 1": true
+          "time": "2-3",
+          "bookedBy": "",
+          "isBooked": false
         },
         {
-          "1 to 2": false
+          "time": "3-4",
+          "bookedBy": "",
+          "isBooked": false
         }
-      ]
+      ],
+      "id": "JgEeP1C"
     },
     {
-      "id": 5,
+      "tableName": "107",
       "timeSlots": [
         {
-          "12 to 1": true
+          "time": "1-2",
+          "bookedBy": "",
+          "isBooked": false
         },
         {
-          "1 to 2": false
+          "time": "2-3",
+          "bookedBy": "",
+          "isBooked": false
+        },
+        {
+          "time": "3-4",
+          "bookedBy": "",
+          "isBooked": false
         }
-      ]
-    },
-    {
-      "id": "107",
-      "timeSlots": [
-        "12-13",
-        null,
-        "1-2",
-        null,
-        null,
-        "2-3"
-      ]
+      ],
+      "id": "z-clpAI"
     }
   ],
   "users": [

@@ -15,6 +15,8 @@ import Button from '@material-ui/core/Button';
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 // import { Multiselect } from "multiselect-react-dropdown";
+import Table from '../classes/tableClass'
+import TableTimeSlots from '../classes/timeSlots'
 
 
 
@@ -67,10 +69,22 @@ const reducer = (state, action) => {
 };
 const initialState = {
     tableId: null,
-    timeSlots: [],
-    bookedBy: "",
-    isBooked: false
+    timeSlots: [{
+        "time": null,
+        "bookedBy": "",
+        "isBooked": false
+    }],
 }
+
+const tableTemp = {
+    tableId: null,
+    timeSlots: [{
+        "time": null,
+        "bookedBy": "",
+        "isBooked": false
+    }],
+}
+
 const times = [
     { value: '12-13', label: '12-13' },
     { value: '1-2', label: '1-2' },
@@ -122,6 +136,7 @@ const AddTablePage = props => {
         selectedOptions.forEach(selectedOption => {
             if (selectedOption !== null) {
                 console.log(`Selected: ${selectedOption.label}`)
+                // temptable = tableTemp. ########################working here man
                 values.push(selectedOption.label)
             }
         },
@@ -139,6 +154,20 @@ const AddTablePage = props => {
         });
     };
 
+    const createTable = (tableNumber, tableId, tsArr) => {
+        let arr = []
+        tsArr.forEach(v => {
+            if ((typeof v === 'string') && !!v) {
+                let ts = new TableTimeSlots(v)
+                arr.push(ts)
+            }
+
+        });
+        let newTab = new Table(tableNumber, tableId, arr)
+        // values.push(newTab)
+        return newTab
+    }
+
 
     const { state: tablesState } = useContext(TablesContext);
     const [data, setData] = useState(initialState);
@@ -149,6 +178,8 @@ const AddTablePage = props => {
     console.log('@atblepage, authContext token: ' + authContext.state.token)
     const handleFormSubmit = event => {
 
+        let newTab = createTable(data.tableId, data.tableId, data.timeSlots)
+        console.log('@atv, formSub, newTab.id: ' + newTab.id)
         setData({
             ...data,
             isSubmitting: true,
@@ -164,8 +195,9 @@ const AddTablePage = props => {
                 'Content-Type': `application/json`
             },
             body: JSON.stringify({
-                id: data.tableId,
-                timeSlots: data.timeSlots,
+                // newTab
+                tableName: newTab.tableName,
+                timeSlots: newTab.timeSlots,
             })
         })
             .then(res => {

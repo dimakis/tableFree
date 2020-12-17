@@ -25,6 +25,7 @@ const TablesList = ({ isBooking, tableForBooking, tables, action }) => {
     const [tableIdFilter, setTableIdFilter] = useState("")
     const tab4book = context.tableForBooking;
     console.log("@tablesList, tab4Book through context grab: " + tab4book +"\ntab4Book typeof:" + typeof tab4book)
+    tables.sort()
     // let displayedTable = tables
     //     .filter(tab => {
     //         if (tab.isBooking)
