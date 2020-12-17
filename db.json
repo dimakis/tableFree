@@ -65,6 +65,61 @@
           "isBooked": true
         }
       ]
+    },
+    {
+      "id": 1,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "timeSlots": [
+        {
+          "12 to 1": true
+        },
+        {
+          "1 to 2": false
+        }
+      ]
+    },
+    {
+      "id": "107",
+      "timeSlots": [
+        "12-13",
+        null,
+        "1-2",
+        null,
+        null,
+        "2-3"
+      ]
     }
   ],
   "users": [

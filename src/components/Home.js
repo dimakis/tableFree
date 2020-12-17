@@ -4,7 +4,7 @@ import { AuthContext } from "../App";
 import Card from "../components/Card";
 import MatCard from "../components/MatCard"
 import TablesList from "../tablesList/tablesList";
-
+import TableSelection from '../components/TableSelection'
 import { Box } from "@material-ui/core";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -114,10 +114,14 @@ export const Home = () => {
   // }
   // setHomeState(isBooking)
   console.log("@Home, tablesContext.tables" + tablesContext.tables)
+  console.log('@Home, autcontext token: ' + authContext.state.token)
+  // console.log('@Home, autcontext.state access_token: ' + authContext.state.access_token)
 
   return (
     <React.Fragment>
       <TabContextProvider>
+        <TableSelection />
+
         <div className="home">
           {tablesContext.state.isFetching ? (
             <span className="loader">LOADING...</span>
@@ -126,7 +130,7 @@ export const Home = () => {
           ) :
               tablesContext.state.isBooking ?
                 (
-                // console.log("@Home in rtn, table isBooking: true\ntypof" + typeof table) &&
+                  // console.log("@Home in rtn, table isBooking: true\ntypof" + typeof table) &&
                   < TablesList isBooking={isBooking} tables={tablesContext.state.tableForBooking} ></TablesList>
                 ) :
                 // console.log("@Home in rtn, table isBooking: false\ntypof" + typeof table) &&

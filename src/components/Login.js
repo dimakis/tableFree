@@ -1,8 +1,8 @@
 import React from "react";
 import { AuthContext } from "../App";
-
+import Button from '@material-ui/core/Button';
 // import AuthContext from "../context/loggedInContext";
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Redirect, useHistory } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
 
@@ -37,7 +37,7 @@ const authenticatedState = {
 //   }
 // };
 
-export const LoginContextProvider = () => {
+export const LoginContextProvider = (props) => {
   const { state, dispatch } = React.useContext(AuthContext);
   // const { state, dispatch }  = React.useContext(AuthContext);
   // const dispatch = useAuthDispatchContext()
@@ -85,15 +85,16 @@ export const LoginContextProvider = () => {
       //   throw res;
       // })
       .then(res => {
-          return res =res.json();
+        return res = res.json();
       })
       // console.log('@login, res.json: ' + res)
       .then(res => {
         dispatch({
           type: "LOGIN",
-          payload: res  
-              })
+          payload: res
+        })
       })
+
       .catch(error => {
         setData({
           ...data,
@@ -101,9 +102,11 @@ export const LoginContextProvider = () => {
           errorMessage: error.message || error.statusText
         });
       });
-    // console.log('@login, res.statustext: ' + res.statusText)
-
+    return (
+      props.history.push('/home/')
+    )
   };
+
   return (
     <div className="login-container">
       <div className="card">
@@ -144,12 +147,11 @@ export const LoginContextProvider = () => {
                     "Login"
                   )}
               </Link>
-              <Route
-                path={`/home/`} component={Home} />
               {/* {props.children} */}
-
             </button>
           </form>
+          <ProtectedRoute
+            path={`/home/`} component={Home} />
         </div>
       </div>
     </div>

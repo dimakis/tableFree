@@ -1,3 +1,6 @@
+# for form submit and navigation using history
+https://stackoverflow.com/questions/54579730/react-hooks-with-react-router-v4-how-do-i-redirect-to-another-route
+
 # command for staring json auth server
 json-server db.json --port 3030 -m ./node_modules/json-server-auth
 ref:
@@ -13,6 +16,7 @@ https://medium.com/@joelazarz/using-concurrently-with-json-server-and-your-react
 https://www.loginradius.com/engineering/blog/everything-you-want-to-know-about-authorization-headers/
 
 https://flaviocopes.com/axios-send-authorization-header/
+
 
 https://jwt.io/introduction/
 # code for the authentication

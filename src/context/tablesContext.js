@@ -27,7 +27,7 @@ const reducer = (state, action) => {
             // console.log('@tablesContext, token: ' + state.token)
 
             return {
-                token: state.token,
+                // token: state.token,
                 // isAuthenticated: 
                 ...state,
                 isFetching: true,

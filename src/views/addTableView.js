@@ -11,6 +11,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TablesContext } from "../context/tablesContext";
 import FormInput from "../controls/textField";
 import { Multiselect } from 'multiselect-react-dropdown';
+import Button from '@material-ui/core/Button';
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
+// import { Multiselect } from "multiselect-react-dropdown";
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,9 +25,20 @@ const useStyles = makeStyles((theme) => ({
             width: '25ch',
             justifyContent: "center"
         },
+        submitButton: {
+            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+            border: 0,
+            borderRadius: 3,
+            boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+            color: 'white',
+            height: 48,
+            padding: '0 30px',
+
+        }
     },
 }));
 
+const animatedComponents = makeAnimated()
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -33,13 +50,14 @@ const reducer = (state, action) => {
             };
         case "BOOK_TABLES_SUCCESS":
             return {
-                ...state,
+                state: { ...state },
                 isFetching: false,
-                tables: action.payload
+                tableId: action.payload.tableId,
+                timeSlots: action.payload.timeSlots
             };
         case "BOOK_TABLES_FAILURE":
             return {
-                ...state,
+                state: { ...state },
                 hasError: true,
                 isFetching: false
             };
@@ -53,7 +71,15 @@ const initialState = {
     bookedBy: "",
     isBooked: false
 }
-
+const times = [
+    { value: '12-13', label: '12-13' },
+    { value: '1-2', label: '1-2' },
+    { value: '2-3', label: '2-3' },
+    { value: '3-4', label: '3-4' },
+    { value: '4-5', label: '4-5' },
+    { value: '5-6', label: '5-6' },
+    { value: '7-8', label: '7-8' },
+];
 
 const AddTablePage = props => {
     const useFormFoos = useForm();
@@ -70,16 +96,17 @@ const AddTablePage = props => {
         });
     };
 
-    const getArray = childArr =>    {
+    const getArray = childArr => {
 
         setData({
             ...data,
 
         })
     }
-    
-    const handleDropdownInputChange = event => {
-        console.log('@handleDropdown, event.target.value: ' + event.target.value)
+
+    const handleDropdownInputChange = selectedOptions => {
+        // event.preventDefault()
+        // console.log('@handleDropdown, event.target.value: ' + event.target.value)
 
         // const { options } = event.target;
         // const value = [];
@@ -91,12 +118,24 @@ const AddTablePage = props => {
         // }
         // console.log('value[i]' +  )
         // setTableId(value)
-        let ts = []
-        event.target.value = ts
-        console.log('@array, event.target.value: ' + ts)
+        let values = state.timeSlots
+        selectedOptions.forEach(selectedOption => {
+            if (selectedOption !== null) {
+                console.log(`Selected: ${selectedOption.label}`)
+                values.push(selectedOption.label)
+            }
+        },
+            values.filter(v =>
+                (typeof v === 'string') && !!v
+            )
+        )
+        values.map(v => {
+            let newArr = []
+
+        })
         setData({
             ...data,
-            timeSlots: event.target.value,
+            timeSlots: values,
         });
     };
 
@@ -107,8 +146,9 @@ const AddTablePage = props => {
     // let tableID = props.id;
     // let tableTime = props.timeSlots.time
 
-    console.log('@atblepage, tablesState: ')
+    console.log('@atblepage, authContext token: ' + authContext.state.token)
     const handleFormSubmit = event => {
+
         setData({
             ...data,
             isSubmitting: true,
@@ -118,10 +158,10 @@ const AddTablePage = props => {
         dispatch({
             type: "ADD_TABLE_REQUEST"
         });
-        fetch(`http://localhost:3030/tables/${data.tableId}`, {
+        fetch(`http://localhost:3030/tables/`, {
             method: "POST",
             headers: {
-                'Autherization': `Bearer ${authContext.state.token}`
+                'Content-Type': `application/json`
             },
             body: JSON.stringify({
                 id: data.tableId,
@@ -129,12 +169,12 @@ const AddTablePage = props => {
             })
         })
             .then(res => {
-                    return res=  res.json();
+                return res = res.json();
             })
-            .then(resJson => {
+            .then(res => {
                 dispatch({
                     type: "ADD_TABLES_SUCCESS",
-                    payload: resJson
+                    payload: res
                 })
             })
 
@@ -147,7 +187,7 @@ const AddTablePage = props => {
             });
     }
 
-// console.log('@add table view, just before return authcontext.state.token: ' + authContext.state.token)
+    // console.log('@add table view, just before return authcontext.state.token: ' + authContext.state.token)
     return (
         // <NavBar />
         <Container >
@@ -155,29 +195,41 @@ const AddTablePage = props => {
             {/* <form className={classes.root} noValidate autoComplete="off"> */}
             <div>
                 {/* <FormProvider { ...useFormFoos} > */}
-                <form className={classes.root} onSubmit={handleFormSubmit}> 
+                <form className={classes.root} onSubmit={handleFormSubmit}>
                     <h2>Table ID:</h2>
                     {/* <FormInput onSubmit={handleFormSubmit} name ="name" label="name" /> */}
                     <TextField onChange={handleTextInputChange} id="tableIdInput" label="Required" value={data.tableID} />
                     <h2>Table Time Slots</h2>
-                    <TimeSlotDropdown multiple={true} onItemChange={handleDropdownInputChange} id="timeSlotDropdown" value={data.timeSlots} />
-
+                    {/* <TimeSlotDropdown multiple={true} onItemChange={handleDropdownInputChange} id="timeSlotDropdown" value={data.timeSlots} /> */}
+                    <Select
+                        value={state.timeSlots}
+                        // default={times[0]}
+                        isMulti
+                        components={animatedComponents}
+                        name='timeSlotsDropdown'
+                        options={times}
+                        classNamePrefix='select'
+                        onChange={handleDropdownInputChange}
+                    ></Select>
 
                     {data.errorMessage && (
                         <span className="form-error">{data.errorMessage}</span>
                     )}
-                    <button disabled={data.isSubmitting}>
-                        {data.isSubmitting ? (
-                            "Loading..."
-                        ) : (
-                                "Submit"
-                            )}
-                    </button>
+                    <Button className={classes.submitButton} >
+                        <button disabled={data.isSubmitting} className={classes.submitButton}>
+                            {data.isSubmitting ? (
+                                "Loading..."
+                            ) : (
+                                    "Submit"
+                                )}
+                        </button>
+                    </Button>
+
                 </form>
                 {/* </FormProvider> */}
             </div>
             {/* </form> */}
-        </Container>
+        </Container >
     );
 };
 export default AddTablePage;

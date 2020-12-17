@@ -37,13 +37,16 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
+      console.log('@APP-> login, in redcucer, access_token: ' + action.payload.access_token)
       console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
+      console.log('@APP-> login, in redcucer, action.payload: ' + action.payload)
+
       // localStorage.setItem("user", JSON.stringify(action.payload.token));
       localStorage.setItem("token", JSON.stringify(action.payload.access_token));
       return {
-        isAuthenticated: true,
         ...state,
-        token: localStorage.getItem("token"),
+        isAuthenticated: true,
+        token: action.payload.access_token,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -62,7 +65,7 @@ function Appify() {
   // const state = context.state
   console.log('@ app')
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  console.log('@app, token: ' + localStorage.getItem('token'))
+  console.log('@app, local storage token: ' + localStorage.getItem('token'))
 
   return (
     <React.Fragment>
@@ -71,26 +74,26 @@ function Appify() {
           value={{
             state,
             isAuthenticated: state.isAuthenticated,
+            token: state.token,
             dispatch
           }}
         >
           <TabContextProvider>
-            {/* <Typography > */}
+            <Typography >
 
-            <NavBar />
-            <TableSelection />
-            {/* <div className="App">{!state.isAuthenticated ? <Link to='login' /> : <Link to='/home/' />}</div> */}
-            <Switch>
-              {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
+              <NavBar />
+              {/* <div className="App">{!state.isAuthenticated ? <Link to='login' /> : <Link to='/home/' />}</div> */}
+              <Switch>
+                {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 
-              <ProtectedRoute exact path="/bookingPage/" component={BookingPageView} />
-              <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
-              <ProtectedRoute exact path="/home/" component={Home} />
-              <Route exact path='/login/' component={Login} />
+                <ProtectedRoute exact path="/bookingPage/:id" component={BookingPageView} />
+                <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
+                <ProtectedRoute exact path="/home/" component={Home} />
+                <Route exact path='/login/' component={Login} />
 
-              <Redirect from="*" to="/login/" />
-            </Switch>
-            {/* </Typography> */}
+                <Redirect from="*" to="/login/" />
+              </Switch>
+            </Typography>
 
           </TabContextProvider>
         </AuthContext.Provider>

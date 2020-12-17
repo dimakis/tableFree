@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 // import { AuthContext } from "../App";
 import AuthContext  from "../context/loggedInContext"
 
-const BookingPage = props => {
+const BookingPage = (props) => {
     const context = useContext(AuthContext);
 
     const initialState = {
@@ -84,6 +84,9 @@ const BookingPage = props => {
                     errorMessage: error.message || error.statusText
                 });
             });
+            return(
+              props.history.push(`/bookingPage/${data.id}`)
+            )
     }
 
     const handleInputChange = event => {
