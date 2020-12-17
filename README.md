@@ -2,7 +2,7 @@
 
 # Assignment 1 - ReactJS app.
 
-Name: Dimtiri Saridakis
+Name: Dimitri Saridakis
 
 ## Features.
 
@@ -35,8 +35,8 @@ Email address:
 > johndoe@abc.com
 With password 
 > 123456789
-
 Will allow for login.
+
 ## API Data Model.
 
 + http://localhost:3035/auth/login - this is the login endpoint to POST requests for autherisation tokens. 
@@ -67,7 +67,6 @@ The majority of the App is styled using Material use and JSS making use of makeS
 
 ### UI Design.
 
-...... Insert screenshots of the new/modified views you have added to the Movies Fan app. Include a caption for each one clearly stating its purpose and any user interaction it supports ........
 ![][bookTablePage]
 > This is the book tables page.
 
@@ -99,35 +98,51 @@ Requires Authentication
 + POST operations and fetch headers
 
 
-# for form submit and navigation using history
+## for form submit and navigation using history
 https://stackoverflow.com/questions/54579730/react-hooks-with-react-router-v4-how-do-i-redirect-to-another-route
 
-# command for staring json auth server
+## command for staring json auth server
 json-server db.json --port 3030 -m ./node_modules/json-server-auth
 ref:
 https://www.npmjs.com/package/json-server-auth
 
-# for private routes
+## for private routes
 https://medium.com/javascript-in-plain-english/how-to-set-up-protected-routes-in-your-react-application-a3254deda380
 
-# for some nice housekeeping involving the servers
+## for some nice housekeeping involving the servers
 https://medium.com/@joelazarz/using-concurrently-with-json-server-and-your-react-app-3d07487acc50
 
-# websites for autherisation header and token code
+## websites for autherisation header and token code
 https://www.loginradius.com/engineering/blog/everything-you-want-to-know-about-authorization-headers/
-
 https://flaviocopes.com/axios-send-authorization-header/
-
-
 https://jwt.io/introduction/
-# code for the authentication
+
+## code for the authentication
 https://www.techiediaries.com/fake-api-jwt-json-server/
 
-
-# inspiration and starting point
+## inspiration and starting point
 https://www.freecodecamp.org/news/build-a-react-hooks-front-end-app-with-routing-and-authentication/
 https://www.freecodecamp.org/news/state-management-with-react-hooks/
 https://medium.com/javascript-in-plain-english/authentication-in-react-caf2abfa0494
+
+## further links:
+https://www.freecodecamp.org/learn/front-end-libraries/react/create-a-controlled-input
+https://medium.com/better-programming/understanding-the-useeffect-dependency-array-2913da504c44
+https://www.freecodecamp.org/news/state-management-with-react-hooks/
+https://medium.com/codingthesmartway-com-blog/create-a-rest-api-with-json-server-36da8680136d
+https://medium.com/@sumn2u/build-a-rest-api-s-from-json-with-authentication-2ee4d21a64a6
+https://www.techiediaries.com/fake-api-jwt-json-server/
+https://www.alibabacloud.com/blog/how-to-implement-authentication-in-reactjs-using-jwt_595820
+https://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api
+https://codeburst.io/to-handle-user-authentication-with-reactjs-2f565e7e0d63
+https://kentcdodds.com/blog/authentication-in-react-applications
+https://medium.com/javascript-in-plain-english/authentication-in-react-caf2abfa0494
+https://medium.com/better-programming/building-basic-react-authentication-e20a574d5e71
+https://googlechrome.github.io/samples/fetch-api/fetch-post.html
+https://stackoverflow.com/questions/44534034/material-ui-select-field-multiselect
+https://stackoverflow.com/questions/53170754/redirect-after-submit-in-react
+https://dev.to/projectescape/programmatic-navigation-in-react-3p1l
+
 ---------------------------------
 
 [model]: ./data.jpg
