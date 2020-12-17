@@ -10,12 +10,13 @@ const BookingPageTamplate = ({ table, tableId, action}) => {
     
     const tablesContext = useContext(TablesContext)
     const dispatchContext = useContext(TablesDispatchContext)
+    const isBooking = tablesContext.state.isBooking
     // const  = context.tableForBooking;
-    // const tableId = table.id;
+    // const tableId = table.id; ###########might need this
     // const table = props.params.table
 
     console.log("bpt first param table: " + table)
-    console.log("bpt second param tableid: " + tableId)
+    // console.log("bpt second param tableid: " + tableId)
     // const tableToBook = tablesContext.tables.filter((tab) => {
     //     return (tab.id === tableId ? tab : console.log('No ID match: Errort in bpt'));
     // }
@@ -23,7 +24,7 @@ const BookingPageTamplate = ({ table, tableId, action}) => {
 
 
 
-    const [isBooking, toggle] = useToggleState(false)
+    // const [isBooking, toggle] = useToggleState(false)
     // let tableBooking = table.filter(e => {
     //     if (e.isBooking)
     //         return e
@@ -52,7 +53,7 @@ const BookingPageTamplate = ({ table, tableId, action}) => {
             <TablesList 
             isBooking={isBooking}
             action={action} 
-            table={table} />
+            tables={table} />
             {/* {console.log('table: ' + table)} */}
         </>
     );

@@ -22,8 +22,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const BookButton = ({ table }) => {
-    const [redirectState, setRedirectState] = useState(false)
+const BookButton = (props) => {
+    let table = props.table
+
+    // const [redirectState, setRedirectState] = useState(false)
     const context = React.useContext(TablesContext)
     const dispatchContext = React.useContext(TablesDispatchContext)
 
@@ -31,43 +33,56 @@ const BookButton = ({ table }) => {
     const tabId = table.id
     let tableName = table.tableName
     const state = context.state
-    const [isBooking, toggle] = useToggleState(false)
+    // const [isBooking, toggle] = useToggleState(false)
 
-    let redirectTo
-    const navigate = state => {
-
-    }
-
-    const handleAddToBooking = e => {
-        // e => isBooking.toggle()a
+    // const BookTable = table => {
+    //     useEffect(() =>
+    //         dispatchContext({ type: "BOOK_TABLE", payload: table })
+    //     )
+    // }
+    // context.fetchTableById(table.id)
+    const handleAddToBooking = (e) => {
+        // BookTable({table})
         console.log("@bookButton, handleAddTooBooking, table: " + table)
+        console.log("@bookButton, handleAddTooBooking, tableID: " + table.id)
+
+
         e.preventDefault();
-        dispatchContext({ type: "BOOK_TABLE", payload: table })
-        context.addBookingToTable(table.id)
+            // context.fetchTableById(table.id)
+        // dispatchContext({ type: "FETCH_TABLE_REQUEST", payload: table.id })
+        console.log('@bookButton,context.tableForBooking' + context.tableForBooking.table)
+
+        console.log("@bookButton, , tableForBooking: " + context.tableForBooking)
+        // context.addBookingToTable(table.id)
         let path = `/bookingPage/${table.id}`
-        setRedirectState(true)
+        // setRedirectState(true)
         // <RedirectCom path={path}   />
+        return (
+
+        props.history.push(`/bookingPage/${table.id}`)
+        )
     }
+
     return (
         <div className={classes.root}>
             <Router>
-                <Link to={{
+                {/* <Link to={{
                     pathname: `/bookingPage/${table.id}`,
                     table: { table },
                     state: { ...state },
-                }}>
-                    <Button onClick={handleAddToBooking} table={table} size={"large"} color="primary"  >
-                        <h2>Table {parseInt(table.tableName)}-></h2>
-                        <BookTwoToneIcon className={classes.root} />
-                    </Button>
-                    {state.isBooking ? <Redirect to={{
-                        pathname: `/bookingPage/${table.id}`,
-                        table: { table },
-                        state: { ...state },
-                    }} /> : null}
-                    {/* return(<Redirect table={table} to="BookingPage" />) */}
+                }}> */}
+                <Button onClick={handleAddToBooking} table={table} size={"large"} color="primary"  >
+                    <h2>Table {parseInt(table.tableName)}-></h2>
+                    <BookTwoToneIcon className={classes.root} />
+                </Button>
+                {state.isBooking ? <Redirect to={{
+                    pathname: `/bookingPage/${table.id}`,
+                    table: { table },
+                    state: { ...state },
+                }} /> : null}
+                {/* return(<Redirect table={table} to="BookingPage" />) */}
 
-                </Link>
+                {/* </Link> */}
             </Router>
         </div>
     )

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import MatCard from '../components/MatCard'
 import { Box } from "@material-ui/core";
-import {TablesContext,  TabContextProvider } from '../context/tablesContext'
+import { TablesContext, TabContextProvider } from '../context/tablesContext'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,8 +24,8 @@ const TablesList = ({ isBooking, tableForBooking, tables, action }) => {
     const classes = useStyles();
     const [tableIdFilter, setTableIdFilter] = useState("")
     const tab4book = context.tableForBooking;
-    console.log("@tablesList, tab4Book through context grab: " + tab4book +"\ntab4Book typeof:" + typeof tab4book)
-    tables.sort()
+    console.log("@tablesList, tab4Book through context grab: " + tab4book + "\ntab4Book typeof:" + typeof tab4book)
+    // if(tables !== undefined) tables.sort()
     // let displayedTable = tables
     //     .filter(tab => {
     //         if (tab.isBooking)
@@ -49,9 +49,11 @@ const TablesList = ({ isBooking, tableForBooking, tables, action }) => {
     //   };
     //     tables.map(table => (
     console.log("tableList: " + tables)
-    console.log("@tableList, isBooking?: "+ isBooking)
+    console.log("tableList: " + tables.id)
+
+    console.log("@tableList, isBooking?: " + isBooking)
     return (
-               <>
+        <TabContextProvider>               <>
             {/* {state.tables.length > 0 && */}
             {isBooking ?
 
@@ -68,6 +70,7 @@ const TablesList = ({ isBooking, tableForBooking, tables, action }) => {
                 // console.log("@tableList, table isBooking: false\ntypof" + typeof table)
             }
         </>
+        </TabContextProvider>
 
     )
 };

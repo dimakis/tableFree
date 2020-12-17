@@ -14,6 +14,7 @@ import AddTablePage from "./views/addTableView";
 import ProtectedRoute from './components/ProtectedRoute'
 import TabContextProvider, { TablesDispatchContext } from "./context/tablesContext";
 import BookingPageView from './views/bookingPageView'
+import TableBookingView from './views/tableBookingPage'
 // import {AuthContext} from './context/loggedInContext'
 
 
@@ -86,6 +87,7 @@ function Appify() {
               <Switch>
                 {/* <Route {!state.isAuthenticated ?  path='/' component={Login} /> */}
 
+                <ProtectedRoute exact path="/bookingPage/" component={TableBookingView} />
                 <ProtectedRoute exact path="/bookingPage/:id" component={BookingPageView} />
                 <ProtectedRoute exact path="/addTablePage/" component={AddTablePage} />
                 <ProtectedRoute exact path="/home/" component={Home} />

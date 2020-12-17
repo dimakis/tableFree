@@ -48,7 +48,7 @@ function createToken(payload){
   
   server.use(/^(?!\/auth).*$/,  (req, res, next) => {
     if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
-      const status = 401
+      const status = 400
       const message = 'Bad authorization header'
       res.status(status).json({status, message})
       return
@@ -57,7 +57,7 @@ function createToken(payload){
        verifyToken(req.headers.authorization.split(' ')[1])
        next()
     } catch (err) {
-      const status = 401
+      const status = 400
       const message = 'Error: access_token is not valid'
       res.status(status).json({status, message})
     }

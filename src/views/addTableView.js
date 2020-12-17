@@ -119,24 +119,10 @@ const AddTablePage = props => {
     }
 
     const handleDropdownInputChange = selectedOptions => {
-        // event.preventDefault()
-        // console.log('@handleDropdown, event.target.value: ' + event.target.value)
-
-        // const { options } = event.target;
-        // const value = [];
-        // for (let i = 0, l = options.length; i < l; i += 1) {
-        //   if (options[i].selected) {
-        //     value.push(options[i].value);
-        //     setData(data.timeSlots.push(options[i].value))
-        //   }
-        // }
-        // console.log('value[i]' +  )
-        // setTableId(value)
         let values = state.timeSlots
         selectedOptions.forEach(selectedOption => {
             if (selectedOption !== null) {
                 console.log(`Selected: ${selectedOption.label}`)
-                // temptable = tableTemp. ########################working here man
                 values.push(selectedOption.label)
             }
         },
@@ -144,10 +130,6 @@ const AddTablePage = props => {
                 (typeof v === 'string') && !!v
             )
         )
-        values.map(v => {
-            let newArr = []
-
-        })
         setData({
             ...data,
             timeSlots: values,
@@ -164,7 +146,6 @@ const AddTablePage = props => {
 
         });
         let newTab = new Table(tableNumber, tableId, arr)
-        // values.push(newTab)
         return newTab
     }
 

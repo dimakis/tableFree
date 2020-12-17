@@ -5,9 +5,6 @@ import Button from '@material-ui/core/Button';
 import { Link, Route, Redirect, useHistory } from 'react-router-dom'
 import ProtectedRoute from "./ProtectedRoute";
 import Home from './Home'
-import Register from './Register'
-import Grid from '@material-ui/core/Grid';
-
 
 //  export const LoggedInContext = React.createContext();
 
@@ -18,7 +15,7 @@ const authenticatedState = {
 };
 
 
-export const LoginContextProvider = (props) => {
+export const Register = (props) => {
   const { state, dispatch } = React.useContext(AuthContext);
   // const { state, dispatch }  = React.useContext(AuthContext);
   // const dispatch = useAuthDispatchContext()
@@ -71,7 +68,7 @@ export const LoginContextProvider = (props) => {
       // console.log('@login, res.json: ' + res)
       .then(res => {
         dispatch({
-          type: "LOGIN",
+          type: "REGISTER",
           payload: res
         })
       })
@@ -89,58 +86,52 @@ export const LoginContextProvider = (props) => {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12}>    <div className="login-container">
-        <div className="card">
-          <div className="container">
-            <form onSubmit={handleFormSubmit}>
-              <h1>Login</h1>
+    <div className="login-container">
+      <div className="card">
+        <div className="container">
+          <form onSubmit={handleFormSubmit}>
+            <h1>Login</h1>
 
-              <label htmlFor="email">
-                Email Address
+            <label htmlFor="email">
+              Email Address
               <input
-                  type="text"
-                  value={data.email}
-                  onChange={handleInputChange}
-                  name="email"
-                  id="email"
-                />
-              </label>
+                type="text"
+                value={data.email}
+                onChange={handleInputChange}
+                name="email"
+                id="email"
+              />
+            </label>
 
-              <label htmlFor="password">
-                Password
+            <label htmlFor="password">
+              Password
               <input
-                  type="password"
-                  value={data.password}
-                  onChange={handleInputChange}
-                  name="password"
-                  id="password"
-                />
-              </label>
+                type="password"
+                value={data.password}
+                onChange={handleInputChange}
+                name="password"
+                id="password"
+              />
+            </label>
 
-              {data.errorMessage && (
-                <span className="form-error">{data.errorMessage}</span>
-              )}
-              <button disabled={data.isSubmitting}>
-                <Link to={`/home/`} >
-                  {data.isSubmitting ? (
-                    "Loading..."
-                  ) : (
-                      "Login"
-                    )}
-                </Link>
-              </button>
-            </form>
-            <ProtectedRoute
-              path={`/home/`} component={Home} />
-          </div>
+            {data.errorMessage && (
+              <span className="form-error">{data.errorMessage}</span>
+            )}
+            <button disabled={data.isSubmitting}>
+              <Link to={`/home/`} >
+                {data.isSubmitting ? (
+                  "Loading..."
+                ) : (
+                    "Login"
+                  )}
+              </Link>
+            </button>
+          </form>
+          <ProtectedRoute
+            path={`/home/`} component={Home} />
         </div>
       </div>
-      </Grid>
-      {/* <Grid item xs={6}> */}
-        {/* <Register /> */}
-      {/* </Grid> */}
-    </Grid>
+    </div>
   );
 };
-export default LoginContextProvider;
+export default Register
