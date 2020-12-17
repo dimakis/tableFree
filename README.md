@@ -131,8 +131,7 @@ https://medium.com/javascript-in-plain-english/authentication-in-react-caf2abfa0
 ---------------------------------
 
 [model]: ./data.jpg
-[movieDetail]: ./public/movieDetail.png
-[review]: ./public/review.png
-[reviewLink]: ./public/reviewLink.png
-[cardLink]: ./public/cardLink.png
-[stories]: ./public/storybook.png
+[homePage]: ./public/homePage.png
+[bookTablePage]: ./public/bookTablePage.png
+[addTablePage]: ./public/addTablePage.png
+[loginPage]: ./public/loginPage.png
