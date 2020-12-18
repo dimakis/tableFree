@@ -104,6 +104,3 @@ function Appify() {
   );
 }
 export default Appify
-
-
-//      <Route ="/" component={Home} />

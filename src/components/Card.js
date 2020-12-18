@@ -10,7 +10,7 @@ export const Card = ({ table }) => {
     console.log("timeSlot: " + ts.time)
 
     console.log("isBooked: " + ts.isBooked)
-  }
+  // }
   console.log("timeSlot size: " + timeSlots.length)
     
   return (
@@ -32,6 +32,7 @@ export const Card = ({ table }) => {
     // </div>
   );
 };
+}
 export default Card;
 
 

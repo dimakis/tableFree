@@ -140,6 +140,6 @@ export const Home = () => {
         </div>
       </TabContextProvider>
     </React.Fragment>
-  );
-};
-export default Home;
+    )
+}
+export default Home

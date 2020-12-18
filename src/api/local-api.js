@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthContext } from "../context/authUserContext";
 
-const getMovies()
+// const getMovies()
 
 
 
@@ -11,14 +11,14 @@ const getMovies()
 
 
 
-export const CallAPI = ()   => {
-    const { dispatch } = React.useContext(AuthContext);
+// export const CallAPI = ()   => {
+//     const { dispatch } = React.useContext(AuthContext);
 
 
     // return(
 
     // );
- }
+//  }
 
 
 
