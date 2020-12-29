@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 
-const server = jsonServer.create()
+const server = jsonServer.create() // use express
 
 const router = jsonServer.router('./db.json')
 

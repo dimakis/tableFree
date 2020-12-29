@@ -26,15 +26,6 @@ const initialState = {
   token: null,
 };
 
-// export const useAuthDispatchContext = () =>  {
-//   const disCon = React.useContext(AuthDispatchContext);
-//   if (disCon === undefined) {
-//     throw new Error('useCountDispatch must be used within a CountProvider')
-//   }
-//   return disCon
-// }
-
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
@@ -42,7 +33,6 @@ const reducer = (state, action) => {
       console.log('@APP-> login, in redcucer, token: ' + action.payload.token)
       console.log('@APP-> login, in redcucer, action.payload: ' + action.payload)
 
-      // localStorage.setItem("user", JSON.stringify(action.payload.token));
       localStorage.setItem("token", JSON.stringify(action.payload.access_token));
       return {
         ...state,
